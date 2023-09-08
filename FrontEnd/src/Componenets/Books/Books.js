@@ -15,10 +15,10 @@ import book4 from "../../assets/Books/eng/eng-book_4.jpg";
 
 const Products = ({ onAddToCart }) => {
 
-    const products= [{id :10,name:"book1",price: 12,source:book1},
-        {id :20,name:"book2",price: 10,source:book2},
-        {id :30,name:"book3",price: 13,source:book3},
-        {id :40,name:"book4",price: 15,source:book4},];
+    const products= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book"},
+        {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book"},
+        {id :30,name:"book3",price: 13,source:book3 , desc:"This is my book"},
+        {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book"},];
 
     const classes = useStyles();
 
