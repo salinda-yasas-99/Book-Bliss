@@ -15,7 +15,8 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "react-bootstrap": "^1.4.0",
-    "react-responsive-carousel": "^3.2.18"
+    "react-responsive-carousel": "^3.2.18",
+    "mdbreact": "^4.6.1"
   },
   "scripts": {
     "start": "react-scripts start",

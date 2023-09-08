@@ -3,7 +3,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SingUp";
-import ProductView from "./Componenets/Books/BookView/ProductView";
+import BookView from "./Componenets/Books/SingleBookView/BookView";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
             <Route index element={<Home/>} />
             <Route path={"login"} element={<Login />} />
             <Route path={"signup"} element={<SignUp />} />
-              <Route path="product-view/:id" element={<ProductView />} />
+              <Route path="product-view/:id" element={<BookView />} />
           </Route>
         </Routes>
       </BrowserRouter>

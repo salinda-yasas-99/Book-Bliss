@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import { Grid, InputAdornment, Input } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-import Product from "./Book/Product";
+import Book from "./Book/Book";
 import useStyles from "./BooksStyles";
 import Carousel from "react-bootstrap/Carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import logo1 from "../../assets/4.jpeg";
-//import "../ProductView/style.css";
-import "./BookView/ProductView.css"
+
+import "./SingleBookView/bookView.css"
 import book1 from "../../assets/Books/eng/eng-book_1.jpg";
 import book2 from "../../assets/Books/eng/eng-book_2.jpg";
 import book3 from "../../assets/Books/eng/eng-book_3.jpg";
 import book4 from "../../assets/Books/eng/eng-book_4.jpg";
 
-const Products = ({ onAddToCart }) => {
 
-    const products= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book"},
+
+const Books = ({ onAddToCart }) => {
+    //define a get request in homepage, for fetch books
+    const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book"},
         {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book"},
         {id :30,name:"book3",price: 13,source:book3 , desc:"This is my book"},
         {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book"},];
@@ -71,7 +73,7 @@ const Products = ({ onAddToCart }) => {
                                         lg={2}
                                         id="pro"
                                     >
-                                        <Product product={product} onAddToCart={onAddToCart} />
+                                        <Book product={product} onAddToCart={onAddToCart} />
                                     </Grid>
                                 ) : (
                                     ""
@@ -83,8 +85,8 @@ const Products = ({ onAddToCart }) => {
             )}*/}
 
             <Grid className={classes.content} container justify="center" spacing={5}>
-                {products
-                    .map((product) => (
+                {BooksArray
+                    .map((singleBook) => (
 
                         <Grid
                             className={classes.content}
@@ -93,10 +95,10 @@ const Products = ({ onAddToCart }) => {
                             sm={6}
                             md={4}
                             lg={3}
-                            id={product.id}
-                            key={product.id}
+                            id={singleBook.id}
+                            key={singleBook.id}
                         >
-                            <Product product={product} onAddToCart={onAddToCart} />
+                            <Book books={singleBook} onAddToCart={onAddToCart} />
                         </Grid>
                     ))}
             </Grid>
@@ -104,36 +106,7 @@ const Products = ({ onAddToCart }) => {
     );
 };
 
-export default Products;
+export default Books;
 
 
 
-/*<Grid className={classes.content} container justify="center" spacing={5}>
-    {products.filter((product) => {
-        if (searchTerm === "") {
-            return product;
-        }
-        else if (
-            product.name
-                .toLowerCase()
-                .includes(searchTerm.toLocaleLowerCase())
-        ) {
-            return product;
-        }
-
-    })
-        .map((product) => (
-            <Grid
-                className={classes.content}
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                lg={3}
-                id={product.id}
-                key={product.id}
-            >
-                <Product product={product} onAddToCart={onAddToCart} />
-            </Grid>
-        ))}
-</Grid>*/
