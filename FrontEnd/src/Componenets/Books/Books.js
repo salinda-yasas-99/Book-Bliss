@@ -52,7 +52,7 @@ const Books = ({ onAddToCart }) => {
                 </Carousel.Item>
             </Carousel>
 
-            {/*{searchTerm === "" && (
+            {searchTerm === "" && (
                 <>
                     <h3 className={classes.contentHeader}>FEATURED</h3>
                     <Grid
@@ -61,9 +61,9 @@ const Books = ({ onAddToCart }) => {
                         justify="center"
                         spacing={1}
                     >
-                        {products.map((product) => (
+                        {BooksArray.map((product) => (
                             <>
-                                {product.categories.length > 0 ? (
+                                {product.length > 0 ? (
                                     <Grid
                                         className={classes.contentFeatured}
                                         item
@@ -82,7 +82,7 @@ const Books = ({ onAddToCart }) => {
                         ))}
                     </Grid>
                 </>
-            )}*/}
+            )}
 
             <Grid className={classes.content} container justify="center" spacing={5}>
                 {BooksArray
