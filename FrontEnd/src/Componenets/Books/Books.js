@@ -15,12 +15,14 @@ import book4 from "../../assets/Books/eng/eng-book_4.jpg";
 
 
 
-const Books = ({ onAddToCart }) => {
+const Books = ({ books,onAddToCart }) => {
     //define a get request in homepage, for fetch books
-    const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book"},
+    /*const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book"},
         {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book"},
         {id :30,name:"book3",price: 13,source:book3 , desc:"This is my book"},
-        {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book"},];
+        {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book"},];*/
+
+    //const BooksArray= books;
 
     const classes = useStyles();
 
@@ -61,7 +63,7 @@ const Books = ({ onAddToCart }) => {
                         justify="center"
                         spacing={1}
                     >
-                        {BooksArray.map((product) => (
+                        {books.map((product) => (
                             <>
                                 {product.length > 0 ? (
                                     <Grid
@@ -85,7 +87,7 @@ const Books = ({ onAddToCart }) => {
             )}
 
             <Grid className={classes.content} container justify="center" spacing={5}>
-                {BooksArray
+                {books
                     .map((singleBook) => (
 
                         <Grid
@@ -98,7 +100,7 @@ const Books = ({ onAddToCart }) => {
                             id={singleBook.id}
                             key={singleBook.id}
                         >
-                            <Book books={singleBook} onAddToCart={onAddToCart} />
+                            <Book book={singleBook} onAddToCart={onAddToCart} />
                         </Grid>
                     ))}
             </Grid>

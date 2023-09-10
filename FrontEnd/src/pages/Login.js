@@ -13,6 +13,7 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import Navbar from "../Componenets/Navbar";
+import Footer from "../Componenets/Footer";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -116,9 +117,12 @@ const SignUp = () => {
                         </Grid>
                     </Grid>
                 </div>
+
             </Grid>
             <Grid item xs={false} sm={false} md={false} lg={false} xl={4} className={classes.image} />
         </Grid>
+
+
     );
 };
 

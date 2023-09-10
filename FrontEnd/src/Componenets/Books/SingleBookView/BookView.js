@@ -8,6 +8,7 @@ import book1 from "../../../assets/Books/eng/eng-book_1.jpg";
 import book2 from "../../../assets/Books/eng/eng-book_2.jpg";
 import book3 from "../../../assets/Books/eng/eng-book_3.jpg";
 import book4 from "../../../assets/Books/eng/eng-book_4.jpg";
+import Navbar from "../../Navbar";
 
 const createMarkup = (text) => {
     return { __html: text };
@@ -48,6 +49,7 @@ const BookView = () => {
 
     return (
         <Container className="product-view">
+            <Navbar />
             <Grid container>
                 <Grid item xs={12} md={6} className="image-wrapper">
                     <img src={book.source} alt={book.name} />
