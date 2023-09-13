@@ -6,11 +6,11 @@ import Cart from "../Componenets/Cart/Cart";
 
 const CartMain = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) =>{
     return(<div>
-        <Navbar />
+       {/* <Navbar />*/}
         <Cart cart={cart}
               onUpdateCartQty={onUpdateCartQty}
               onRemoveFromCart={onRemoveFromCart}/>
-        <Footer />
+       {/* <Footer />*/}
     </div>)
 }
 

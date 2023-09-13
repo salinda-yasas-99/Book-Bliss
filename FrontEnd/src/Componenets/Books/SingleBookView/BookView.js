@@ -49,7 +49,6 @@ const BookView = () => {
 
     return (
         <Container className="product-view">
-            <Navbar />
             <Grid container>
                 <Grid item xs={12} md={6} className="image-wrapper">
                     <img src={book.source} alt={book.name} />

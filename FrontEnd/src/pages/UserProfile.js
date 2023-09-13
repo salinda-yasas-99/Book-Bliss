@@ -170,7 +170,7 @@ function UserProfile() {
 
     return (
         <div className={classes.root}>
-            <Navbar />
+          {/*  <Navbar />*/}
             <div className={classes.content}>
                 <Container component="main" maxWidth="xs">
                     <div className={classes.root}>
@@ -218,7 +218,7 @@ function UserProfile() {
 
                 </Container>
             </div>
-            <Footer className={classes.footer} />
+           {/* <Footer className={classes.footer} />*/}
         </div>
     );
 }

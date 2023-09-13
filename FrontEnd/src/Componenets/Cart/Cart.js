@@ -21,13 +21,28 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
     const renderCart = () => (
         <>
             <Grid container spacing={4}>
-                {/*cart=[{bookId: 1,
-                bookName: amara,
-                bookUrl : book2,
-                quantity: 10,
+           {/*     const cart = {
+                items: [
+            {
+                bookId: 1,
+                name: "Book Title",
+                source: "book.jpg",
                 price: 20,
-                booktotal: 200} ]*/}
-                {cart.map((cartItem) => (
+                quantity: 2,
+                booktotal: 40,
+            },
+            {
+                bookId: 2,
+                name: "Another Book",
+                source: "another-book.jpg",
+                price: 15,
+                quantity: 1,
+                booktotal: 15,
+            },
+                ],
+                totalItems: 3, // This property stores the total number of distinct items in the cart
+            };*/}
+                {cart.items.map((cartItem) => (
                     <Grid item xs={12} sm={4} key={cartItem.id}>
                         <CartItem item={cartItem} onUpdateCartQty={onUpdateCartQty} onRemoveFromCart={onRemoveFromCart} />
                     </Grid>
@@ -48,7 +63,7 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
             <div className={classes.toolbar} />
             <Typography className={classes.title} variant="h5" gutterBottom><b>Your Shopping Cart</b></Typography>
             <hr/>
-            { !cart.length ? renderEmptyCart() : renderCart() }
+            { !cart.items.length ? renderEmptyCart() : renderCart() }
         </Container>
     );
 };

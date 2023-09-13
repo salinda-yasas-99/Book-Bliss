@@ -19,7 +19,7 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
                 quantity: 10,
                 price: 20,
                 booktotal: 200} ]*/}
-            <CardMedia image={item.bookUrl} alt={item.bookName} className={classes.media} />
+            <CardMedia image={item.source} alt={item.name} className={classes.media} />
             <CardContent className={classes.cardContent}>
                 <Typography variant="h6">{item.name}</Typography>
                 <Typography variant="h6" color='secondary' >{item.booktotal}</Typography>
