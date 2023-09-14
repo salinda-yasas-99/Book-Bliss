@@ -20,6 +20,7 @@ function App() {
     const [cart, setCart] = useState({
         items: [], // Initialize as an empty array
         totalItems: 0,
+        totalPrice:0,
     });
 
     /*const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book"},
@@ -67,6 +68,7 @@ function App() {
             const updatedCart = {
                 items: [newItem],
                 totalItems: quantity,
+                totalPrice: book.price * quantity,
             };
 
             // Update the cart state with the new cart object
@@ -85,10 +87,17 @@ function App() {
                     updatedCart.items[existingItemIndex].quantity * updatedCart.items[existingItemIndex].price;
                 updatedCart.totalItems += quantity;
 
+                let updatedTotal = 0;
+                for(const i of updatedCart.items){
+                    updatedTotal = updatedTotal+ i.booktotal;
+
+                };
+
                 // Update the cart state with the updated cart object
                 setCart({
                     items: updatedCart.items,
                     totalItems: cart.totalItems + 1,
+                    totalPrice: updatedTotal
                 });
 
             } else {
@@ -102,10 +111,16 @@ function App() {
                     booktotal: book.price * quantity,
                 };
 
+                let updatedTotal = cart.totalPrice+ book.price * quantity;
+
+
                 const updatedCart = {
                     items: [...cart.items, newItem],
                     totalItems: cart.totalItems + quantity,
+                    totalPrice: updatedTotal,
+
                 };
+
 
                 // Update the cart state with the new cart object
                 setCart(updatedCart);
@@ -135,6 +150,13 @@ function App() {
             if(updatedQuantity !== 0){
                 updatedCart.items[itemIndex].quantity = updatedQuantity;
                 updatedCart.items[itemIndex].booktotal =updatedCart.items[itemIndex].price *updatedQuantity;
+                let updatedTotal = 0;
+                for(const i of updatedCart.items){
+                    updatedTotal = updatedTotal+ i.booktotal;
+
+                };
+
+                updatedCart.totalPrice = updatedTotal;
             }
 
         }
@@ -156,6 +178,14 @@ function App() {
 
             // Update the totalItems count
             updatedCart.totalItems -= 1;
+
+            let updatedTotal = 0;
+            for(const i of updatedCart.items){
+                updatedTotal = updatedTotal+ i.booktotal;
+
+            };
+            //setting updated total price
+            updatedCart.totalPrice= updatedTotal;
 
             // Set the cart state with the updated cart object
             setCart(updatedCart);
