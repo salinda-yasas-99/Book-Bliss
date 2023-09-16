@@ -9,19 +9,58 @@ import Navbar from "./Componenets/Navbar"
 
 import UserProfile from "./pages/UserProfile";
 import Cart from "./Componenets/Cart/Cart";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import book1 from "./assets/Books/eng/eng-book_1.jpg";
 import book2 from "./assets/Books/eng/eng-book_2.jpg";
 import book3 from "./assets/Books/eng/eng-book_3.jpg";
 import book4 from "./assets/Books/eng/eng-book_4.jpg";
 import Footer from "./Componenets/Footer";
+import Checkout from "./Componenets/Checkout Form/Checkout/Checkout";
+import {countries} from "country-data";
+import PaymentForm from "./Componenets/Checkout Form/PaymentForm";
 
 function App() {
+
     const [cart, setCart] = useState({
+        id:1,
         items: [], // Initialize as an empty array
         totalItems: 0,
         totalPrice:0,
     });
+
+    const [newOrder,setNewOrder] = useState({})
+
+    const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book"},
+        {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book"},
+        {id :30,name:"book3",price: 13,source:book3 , desc:"This is my book"},
+        {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book"},];
+
+
+    /*const order = {
+        orderItems: [
+            {
+                bookId: 1,
+                name: "Book Title",
+                source: "book.jpg",
+                price: 20,
+                quantity: 2,
+                booktotal: 40,
+            },
+            {
+                bookId: 2,
+                name: "Another Book",
+                source: "another-book.jpg",
+                price: 15,
+                quantity: 1,
+                booktotal: 15,
+            },
+        ],
+        totalOrderItems: 3,
+        totalPrice: 55,
+        fname: "salinda",
+        lname: "yasas"
+
+    };*/
 
     /*const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book"},
        {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book"},
@@ -130,10 +169,25 @@ function App() {
 
 
 
+   /* const countries  = require('country-data').countries;
+
+    const countryNames = [];*/
+
+    /*// Loop through the countries and log each object individually
+    countries.all.forEach((country, index) => {
+        countryNames.push(country.name);
+        // console.log(`Country ${index + 1}:`, country.name);
+    });
+
+    countryNames.forEach((country,index) =>{
+        console.log("Country name is"+country);
+    })
+    //console.log("This is countries"+countries.all);*/
 
     // Use a useEffect hook to log the updated cart when it changes
     useEffect(() => {
         console.log("Cart has been updated:", JSON.stringify(cart));
+        console.log("this is new order",JSON.stringify(newOrder));
     }, [cart]);
 
 
@@ -204,10 +258,17 @@ function App() {
         setCart(newCart);
     };*/
 
-    const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book"},
-        {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book"},
-        {id :30,name:"book3",price: 13,source:book3 , desc:"This is my book"},
-        {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book"},];
+
+
+    const handleCaptureCheckout = async (newOrder) => {
+
+
+            setNewOrder(newOrder);
+            //refreshCart();
+
+    };
+
+
 
 
 
@@ -221,18 +282,18 @@ function App() {
           />
 
         <Routes>
-
           <Route path={"/"}>
 
-            <Route index element={<Home books={BooksArray} onAddToCart={handleAddToCart}/>} />
-            <Route path={"login"} element={<Login />} />
-            <Route path={"signup"} element={<SignUp />} />
+              <Route index element={<Home books={BooksArray} onAddToCart={handleAddToCart}/>} />
+              <Route path={"login"} element={<Login />} />
+              <Route path={"signup"} element={<SignUp />} />
               <Route path="product-view/:id" element={<BookView />} />
               <Route path="profile" element={<UserProfile />} />
               <Route path={"cart"} element={<CartMain cart={cart}
                                                   onUpdateCartQty={handleUpdateCartQty}
                                                   onRemoveFromCart={handleRemoveFromCart}/>}></Route>
-          </Route>
+              </Route>
+              <Route path={"checkout"} element={<Checkout cart={cart} order={newOrder} onCaptureCheckout={handleCaptureCheckout}/>} />
         </Routes>
           <Footer />
       </BrowserRouter>
