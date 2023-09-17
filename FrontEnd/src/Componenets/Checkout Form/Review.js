@@ -96,7 +96,7 @@ const Review = ({ cart,shippingData }) => {
                     cart.items.map((product) => (
                         <ListItem style={{ padding: '10px 0' }} key={product.name}>
                             <ListItemText primary={product.name} secondary={`Quantity: ${product.quantity} Book Price: ${product.price}`} />
-                            <Typography variant="body2">{product.quantity}</Typography>
+                            <Typography variant="body2">{product.booktotal}</Typography>
                         </ListItem>
                     ))
                 ) : (
@@ -131,8 +131,8 @@ const Review = ({ cart,shippingData }) => {
                     </Typography>
                 </ListItem>
                 <ListItem style={{ padding: '10px 0' }}>
-                    <ListItemText primary={<Typography style={{ fontWeight: 700 }}>Total</Typography>}  />
-                    <Typography variant="subtitle1" style={{ fontWeight: 700 }}>
+                    <ListItemText primary={<Typography style={{ fontWeight: 700,fontSize:"30px" }}>Total</Typography>}  />
+                    <Typography variant="subtitle1" style={{ fontWeight: 700,fontSize:"30px" }}>
                         {cart && cart.totalPrice && shippingData.shippingOption ? cart.totalPrice+shippingData.shippingOption.price : 0}
                     </Typography>
                 </ListItem>
