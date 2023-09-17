@@ -62,7 +62,7 @@ const SignUp = () => {
 
     return (
         <Grid container component="main" className={classes.root}>
-            <Navbar />
+            {/*<Navbar />*/}
             <CssBaseline />
             <Grid item xs={false} sm={4} md={7} lg={4} xl={4} className={classes.image} />
             <Grid item xs={12} sm={8} md={5} lg={8} xl={4} component={Box} display="flex" justifyContent="center" alignItems="center"  style={{paddingTop:"150px",}}>

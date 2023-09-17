@@ -6,22 +6,12 @@ import useStyles from "./BooksStyles";
 import Carousel from "react-bootstrap/Carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import logo1 from "../../assets/4.jpeg";
-
 import "./SingleBookView/bookView.css"
-import book1 from "../../assets/Books/eng/eng-book_1.jpg";
-import book2 from "../../assets/Books/eng/eng-book_2.jpg";
-import book3 from "../../assets/Books/eng/eng-book_3.jpg";
-import book4 from "../../assets/Books/eng/eng-book_4.jpg";
 
 
 
-const Books = ({ onAddToCart }) => {
-    //define a get request in homepage, for fetch books
-    const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book"},
-        {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book"},
-        {id :30,name:"book3",price: 13,source:book3 , desc:"This is my book"},
-        {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book"},];
 
+const Books = ({ books,onAddToCart }) => {
     const classes = useStyles();
 
     const [searchTerm, setSearchTerm] = useState("");
@@ -52,7 +42,7 @@ const Books = ({ onAddToCart }) => {
                 </Carousel.Item>
             </Carousel>
 
-            {/*{searchTerm === "" && (
+            {searchTerm === "" && (
                 <>
                     <h3 className={classes.contentHeader}>FEATURED</h3>
                     <Grid
@@ -61,9 +51,9 @@ const Books = ({ onAddToCart }) => {
                         justify="center"
                         spacing={1}
                     >
-                        {products.map((product) => (
+                        {books.map((product) => (
                             <>
-                                {product.categories.length > 0 ? (
+                                {product.length > 0 ? (
                                     <Grid
                                         className={classes.contentFeatured}
                                         item
@@ -82,10 +72,10 @@ const Books = ({ onAddToCart }) => {
                         ))}
                     </Grid>
                 </>
-            )}*/}
+            )}
 
             <Grid className={classes.content} container justify="center" spacing={5}>
-                {BooksArray
+                {books
                     .map((singleBook) => (
 
                         <Grid
@@ -98,7 +88,7 @@ const Books = ({ onAddToCart }) => {
                             id={singleBook.id}
                             key={singleBook.id}
                         >
-                            <Book books={singleBook} onAddToCart={onAddToCart} />
+                            <Book book={singleBook} onAddToCart={onAddToCart} />
                         </Grid>
                     ))}
             </Grid>

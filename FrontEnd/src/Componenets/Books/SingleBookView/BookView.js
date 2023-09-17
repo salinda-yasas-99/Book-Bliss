@@ -8,6 +8,7 @@ import book1 from "../../../assets/Books/eng/eng-book_1.jpg";
 import book2 from "../../../assets/Books/eng/eng-book_2.jpg";
 import book3 from "../../../assets/Books/eng/eng-book_3.jpg";
 import book4 from "../../../assets/Books/eng/eng-book_4.jpg";
+import Navbar from "../../Navbar";
 
 const createMarkup = (text) => {
     return { __html: text };
@@ -15,10 +16,10 @@ const createMarkup = (text) => {
 
 const BookView = () => {
 
-    const books= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book"},
-            {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book"},
-            {id :30,name:"book3",price: 13,source:book3 , desc:"This is my book"},
-            {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book"},];
+    const books= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Novel"},
+        {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book",author:"Martin",category:"english",subCategory:"Mystery"},
+        {id :30,name:"book3",price: 13,source:book3 , desc:"This is my book",author:"Martin",category:"english",subCategory:"Adventure"},
+        {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Grade 10"}];
 
     const [book, setBook] = useState({});
 
