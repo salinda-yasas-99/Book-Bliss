@@ -53,6 +53,7 @@ const AddressForm = ({dataFromAddressForm }) => {
         const deliveryOptions = [{
             type:"Domestic",
             price: 500,
+
         } , {
             type:"International",
             price: 400,

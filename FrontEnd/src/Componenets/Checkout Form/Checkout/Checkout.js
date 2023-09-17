@@ -92,6 +92,11 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
         },
     },
 };*/
+    useEffect(() => {
+        console.log("this is order in checkoutform",JSON.stringify(order));
+    }, [order]);
+
+
     let Confirmation = () =>
         order.customer ? (
             <>

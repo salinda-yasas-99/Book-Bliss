@@ -30,64 +30,34 @@ function App() {
 
     const [newOrder,setNewOrder] = useState({})
 
-    const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book"},
-        {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book"},
-        {id :30,name:"book3",price: 13,source:book3 , desc:"This is my book"},
-        {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book"},];
+    const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Novel"},
+        {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book",author:"Martin",category:"english",subCategory:"Mystery"},
+        {id :30,name:"book3",price: 13,source:book3 , desc:"This is my book",author:"Martin",category:"english",subCategory:"Adventure"},
+        {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Grade 10"}];
 
 
-    /*const order = {
-        orderItems: [
-            {
-                bookId: 1,
-                name: "Book Title",
-                source: "book.jpg",
-                price: 20,
-                quantity: 2,
-                booktotal: 40,
-            },
-            {
-                bookId: 2,
-                name: "Another Book",
-                source: "another-book.jpg",
-                price: 15,
-                quantity: 1,
-                booktotal: 15,
-            },
+    /*{
+    "id":1,
+    "line_items":[{"bookId":20,"name":"book2","source":"/static/media/eng-book_2.f8cac6eccd0cf1c56581.jpg","quantity":3,"price":10,"booktotal":30},{"bookId":40,"name":"book4","source":"/static/media/eng-book_4.08edfc6ba3c5c578201c.jpg","quantity":1,"price":15,"booktotal":15}],
+    "customer":{"firstname":"Salinda","lastname":"Yasas","email":"salindasym@gmail.com"},
+    "shipping":{"name":"Domestic","street":"142/1,Wewalduwa road, Kelaniya","town_city":"Kelaniya","postal_zip_code":"11600","country":"American Samoa"},
+    "shippingType":{"shipping_method":{"type":"Domestic","price":500}},
+    "payment":{"gateway":"stripe","stripe":{"payment_method_id":"pm_1NrExoSHFIyVtnqxJBcc3Ofn"}},
+    "totalPayment":45
+    }
+*/
+
+
+
+            /*{
+        "id":1,
+        "items":[
+        {"bookId":20,"name":"book2","source":"/static/media/eng-book_2.f8cac6eccd0cf1c56581.jpg","quantity":1,"price":10,"booktotal":10},{"bookId":30,"name":"book3","source":"/static/media/eng-book_3.47580ba5dc373f0ca881.jpg","quantity":1,"price":13,"booktotal":13}
         ],
-        totalOrderItems: 3,
-        totalPrice: 55,
-        fname: "salinda",
-        lname: "yasas"
-
-    };*/
-
-    /*const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book"},
-       {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book"},
-       {id :30,name:"book3",price: 13,source:book3 , desc:"This is my book"},
-       {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book"},];*/
-
-    /*const cart = {
-        items: [
-            {
-                bookId: 1,
-                name: "Book Title",
-                source: "book.jpg",
-                price: 20,
-                quantity: 2,
-                booktotal: 40,
-            },
-            {
-                bookId: 2,
-                name: "Another Book",
-                source: "another-book.jpg",
-                price: 15,
-                quantity: 1,
-                booktotal: 15,
-            },
-        ],
-        totalItems: 3, // This property stores the total number of distinct items in the cart
-    };*/
+        "totalItems":2,
+        "totalPrice":23
+        }
+        */
 
 
     const handleAddToCart = async (book, quantity) => {
@@ -101,10 +71,13 @@ function App() {
                 source: book.source,
                 quantity: quantity,
                 price: book.price,
+                cat: book.category,
+                subcat:book.subCategory,
                 booktotal: book.price * quantity,
             };
 
             const updatedCart = {
+                id:1,
                 items: [newItem],
                 totalItems: quantity,
                 totalPrice: book.price * quantity,
@@ -134,6 +107,7 @@ function App() {
 
                 // Update the cart state with the updated cart object
                 setCart({
+                    id:1,
                     items: updatedCart.items,
                     totalItems: cart.totalItems + 1,
                     totalPrice: updatedTotal
@@ -147,13 +121,16 @@ function App() {
                     source: book.source,
                     quantity: quantity,
                     price: book.price,
-                    booktotal: book.price * quantity,
+                    cat: book.category,
+                    subcat:book.subCategory,
+                                        booktotal: book.price * quantity,
                 };
 
                 let updatedTotal = cart.totalPrice+ book.price * quantity;
 
 
                 const updatedCart = {
+                    id:1,
                     items: [...cart.items, newItem],
                     totalItems: cart.totalItems + quantity,
                     totalPrice: updatedTotal,
@@ -166,8 +143,6 @@ function App() {
             }
         }
     };
-
-
 
    /* const countries  = require('country-data').countries;
 
@@ -187,8 +162,12 @@ function App() {
     // Use a useEffect hook to log the updated cart when it changes
     useEffect(() => {
         console.log("Cart has been updated:", JSON.stringify(cart));
-        console.log("this is new order",JSON.stringify(newOrder));
+
     }, [cart]);
+
+    useEffect(() => {
+        console.log("this is new order",JSON.stringify(newOrder));
+    }, [newOrder]);
 
 
     const handleUpdateCartQty = async (bookId, updatedQuantity) => {
@@ -261,7 +240,6 @@ function App() {
 
 
     const handleCaptureCheckout = async (newOrder) => {
-
 
             setNewOrder(newOrder);
             //refreshCart();

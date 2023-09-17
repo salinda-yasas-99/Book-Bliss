@@ -50,9 +50,7 @@ const Home  = ({books , onAddToCart}) =>{
 
     return(
         <div className={"home"}>
-           {/* <Navbar user={"sali"}/>*/}
             <Books books={books} onAddToCart={onAddToCart}/>
-           {/* <Footer />*/}
         </div>
     )
 

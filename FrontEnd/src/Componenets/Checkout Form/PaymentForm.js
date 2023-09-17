@@ -78,7 +78,7 @@ const PaymentForm = ({ nextStep, backStep, shippingData, onCaptureCheckout,cart}
                 line_items: cart.items,
                 customer: { firstname: shippingData.firstName, lastname: shippingData.lastName, email: shippingData.email },
                 shipping: { name: shippingData.shippingOption.type, street: shippingData.address, town_city: shippingData.city, postal_zip_code: shippingData.zip, country: shippingData.shippingCountry },
-                fulfillment: { shipping_method: shippingData.shippingOption },
+                shippingType: { shipping_method: shippingData.shippingOption },
                 payment: {
                     gateway: 'stripe',
                     stripe: {
@@ -97,7 +97,7 @@ const PaymentForm = ({ nextStep, backStep, shippingData, onCaptureCheckout,cart}
 
     return (
         <>
-            <Review order={newOrder}/>
+            <Review cart={cart} shippingData={shippingData}/>
             <Divider />
             <Typography variant="h6" gutterBottom style={{ margin: '20px 0' }}>Payment method</Typography>
             <Elements stripe={stripePromise}>
@@ -108,7 +108,7 @@ const PaymentForm = ({ nextStep, backStep, shippingData, onCaptureCheckout,cart}
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <Button variant="outlined" onClick={backStep}>Back</Button>
                             <Button type="submit" variant="contained" disabled={!stripe} style={{ backgroundColor: '#1C2331', color: '#FFFF' }} >
-                                Pay {123}
+                                Pay {cart.totalPrice+shippingData.shippingOption.price}
                             </Button>
                         </div>
                     </form>

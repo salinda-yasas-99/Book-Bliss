@@ -1,20 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Typography, List, ListItem, ListItemText } from '@material-ui/core';
 
 
 
-/*const order = {
-    line_items: cart.items,
-    customer: { firstname: shippingData.firstName, lastname: shippingData.lastName, email: shippingData.email },
-    shipping: { name: shippingData.shippingOption.type, street: shippingData.address, town_city: shippingData.city, postal_zip_code: shippingData.zip, country: shippingData.shippingCountry },
-    fulfillment: { shipping_method: shippingData.shippingOption },
-    payment: {
-        gateway: 'stripe',
-        stripe: {
-            payment_method_id: paymentMethod.id,
-        },
-    },
-};*/
+
 
 /*const cart = {
         items: [
@@ -39,10 +28,10 @@ import { Typography, List, ListItem, ListItemText } from '@material-ui/core';
         totalPrice:55,
     };*/
 
-const Review = ({order}) => (
+/*const Review = ({cart}) => (
     <>
         <Typography variant="h6" gutterBottom>Order summary</Typography>
-       {/* <List disablePadding>
+       {/!* <List disablePadding>
             {order.line_items.map((product) => (
                 <ListItem style={{ padding: '10px 0' }} key={product.name}>
                     <ListItemText primary={product.name} secondary={`Quantity: ${product.quantity}`} />
@@ -55,10 +44,10 @@ const Review = ({order}) => (
                     {order.totalPayment}
                 </Typography>
             </ListItem>
-        </List>*/}
+        </List>*!/}
         <List disablePadding>
-            {order && order.line_items ? (
-                order.line_items.map((product) => (
+            {cart && cart.items ? (
+                cart.items.map((product) => (
                     <ListItem style={{ padding: '10px 0' }} key={product.name}>
                         <ListItemText primary={product.name} secondary={`Quantity: ${product.quantity}`} />
                         <Typography variant="body2">{product.quantity}</Typography>
@@ -72,12 +61,87 @@ const Review = ({order}) => (
             <ListItem style={{ padding: '10px 0' }}>
                 <ListItemText primary="Total" />
                 <Typography variant="subtitle1" style={{ fontWeight: 700 }}>
-                    {order && order.totalPayment ? order.totalPayment : 0}
+                    {cart && cart.totalPrice ? cart.totalPrice : 0}
                 </Typography>
             </ListItem>
         </List>
 
     </>
-);
+);*/
+
+/*shippingData :
+        address:"142/1,Wewalduwa road, Kelaniya"
+        city:"Kelaniya"
+        email:"salindasym@gmail.com"
+        firstName:"Salinda"
+        lastName:"Yasas"
+        shippingCountry:"Austria"
+        shippingOption:{price:500,type:"Domestic"}
+        zip:"11600"*/
+
+
+
+const Review = ({ cart,shippingData }) => {
+
+    useEffect(() => {
+        console.log("Cart in review:", JSON.stringify(cart));
+
+    }, [cart]);
+
+    return (
+        <>
+            <Typography variant="h6" gutterBottom>Order summary</Typography>
+            <List disablePadding>
+                {cart && cart.items ? (
+                    cart.items.map((product) => (
+                        <ListItem style={{ padding: '10px 0' }} key={product.name}>
+                            <ListItemText primary={product.name} secondary={`Quantity: ${product.quantity} Book Price: ${product.price}`} />
+                            <Typography variant="body2">{product.quantity}</Typography>
+                        </ListItem>
+                    ))
+                ) : (
+                    <ListItem style={{ padding: '10px 0' }} key={cart.id}>
+                        <ListItemText primary="No items in the order" />
+                    </ListItem>
+                )}
+                <ListItem style={{ padding: '10px 0' }} kay={cart.id}>
+                    <ListItemText
+                        primary={
+                            <Typography>
+                                Items Total
+                            </Typography>
+                        }
+                    />
+
+                    <Typography variant="subtitle1" >
+                        {cart && cart.totalPrice ? cart.totalPrice : 0}
+                    </Typography>
+                </ListItem>
+                <ListItem style={{ padding: '10px 0' }} kay={cart.id}>
+                    <ListItemText
+                        primary={
+                            <Typography>
+                                Shipping charges
+                            </Typography>
+                        }
+                    />
+
+                    <Typography variant="subtitle1" >
+                        {shippingData && shippingData.shippingOption ? shippingData.shippingOption.price : 0}
+                    </Typography>
+                </ListItem>
+                <ListItem style={{ padding: '10px 0' }}>
+                    <ListItemText primary={<Typography style={{ fontWeight: 700 }}>Total</Typography>}  />
+                    <Typography variant="subtitle1" style={{ fontWeight: 700 }}>
+                        {cart && cart.totalPrice && shippingData.shippingOption ? cart.totalPrice+shippingData.shippingOption.price : 0}
+                    </Typography>
+                </ListItem>
+            </List>
+        </>
+    );
+};
 
 export default Review;
+
+
+
