@@ -12,8 +12,8 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import Navbar from "../Componenets/Navbar";
-import Footer from "../Componenets/Footer";
+import {logUser} from "../Services/RestApiCalls";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -75,6 +75,7 @@ const SignUp = () => {
             setEmailError();
             setPasswordError();
             console.log("This is user ",user);
+            logUser(user);
         }
 
     };
