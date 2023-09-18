@@ -12,7 +12,8 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import Navbar from "../Componenets/Navbar";
+import {registerUser} from "../Services/RestApiCalls";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -45,24 +46,60 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    errorText: {
+        color: 'red',
+        marginTop: theme.spacing(1), // Add some spacing between text field and error message
+    },
 }));
 
 const SignUp = () => {
     const classes = useStyles();
-    const [userName, setUserName] = useState('');
     const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const handleFormSubmit = (e) => {
-        e.preventDefault();
-        // Handle form submission logic here
+    const [passwordError, setPasswordError] = useState();
+    const [emailError,setEmailError] =useState();
+
+    const NewUser = {
+        "firstname": firstName ,
+        "lastname": lastName,
+        "email": email,
+        "password": password
     };
+
+    
+
+    const handleFormSubmit = async (e) => {
+
+        e.preventDefault();
+
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+        if (password !== confirmPassword) {
+            setPasswordError('Passwords do not match');
+            return;
+        }
+        if (!emailRegex.test(email)) {
+            setEmailError('Invalid email address');
+            return;
+        }
+        else {
+            setPasswordError();
+            setEmailError();
+            console.log("New user is: ",NewUser);
+            registerUser(NewUser);
+
+        }
+    };
+
+
 
     return (
         <Grid container component="main" className={classes.root}>
-            {/*<Navbar />*/}
+
             <CssBaseline />
             <Grid item xs={false} sm={4} md={7} lg={4} xl={4} className={classes.image} />
             <Grid item xs={12} sm={8} md={5} lg={8} xl={4} component={Box} display="flex" justifyContent="center" alignItems="center"  style={{paddingTop:"150px",}}>
@@ -73,27 +110,15 @@ const SignUp = () => {
                     <Typography component="h1" variant="h5">
                         Sign Up
                     </Typography>
-                    <form className={classes.form} onSubmit={handleFormSubmit}>
+                    <form className={classes.form} onSubmit={(e) =>handleFormSubmit(e)} method="POST">
                         <TextField
                             variant="outlined"
                             margin="normal"
                             required
                             fullWidth
-                            id="userName"
-                            label="Username"
-                            name="userName"
-                            autoComplete="off"
-                            value={userName}
-                            onChange={(e) => setUserName(e.target.value)}
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="firstName"
+                            id="firstname"
                             label="First Name"
-                            name="firstName"
+                            name="firstname"
                             autoComplete="off"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
@@ -101,6 +126,20 @@ const SignUp = () => {
                         <TextField
                             variant="outlined"
                             margin="normal"
+                            required
+                            fullWidth
+                            id="lastname"
+                            label="Last Name"
+                            name="lastname"
+                            autoComplete="off"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            error={emailError && true}
+                            helperText={emailError}
                             required
                             fullWidth
                             id="email"
@@ -113,6 +152,7 @@ const SignUp = () => {
                         <TextField
                             variant="outlined"
                             margin="normal"
+                            error={passwordError && true}
                             required
                             fullWidth
                             name="password"
@@ -126,6 +166,8 @@ const SignUp = () => {
                         <TextField
                             variant="outlined"
                             margin="normal"
+                            error={passwordError && true}
+                            helperText={passwordError}
                             required
                             fullWidth
                             name="confirmPassword"
@@ -135,6 +177,7 @@ const SignUp = () => {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
+                      {/*  {error && <Typography variant="body2" color="error">{error}</Typography>}*/}
                         <Button
                             type="submit"
                             fullWidth

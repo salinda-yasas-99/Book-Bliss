@@ -50,13 +50,33 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = () => {
     const classes = useStyles();
-    const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
+    const [passwordError,setPasswordError] = useState();
+    const [emailError,setEmailError] =useState();
+
+    const user ={
+        "email":email ,
+        "password":password
+    };
 
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission logic here
+
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+        if (!emailRegex.test(email)) {
+            setEmailError('Invalid email address');
+            return;
+        }
+        else{
+            setEmailError();
+            setPasswordError();
+            console.log("This is user ",user);
+        }
+
     };
 
     return (
@@ -72,18 +92,20 @@ const SignUp = () => {
                     <Typography component="h1" variant="h5">
                         Log In
                     </Typography>
-                    <form className={classes.form} onSubmit={handleFormSubmit}>
+                    <form className={classes.form} onSubmit={handleFormSubmit} method="POST">
                         <TextField
                             variant="outlined"
                             margin="normal"
+                            error={emailError && true}
+                            helperText={emailError}
                             required
                             fullWidth
-                            id="userName"
-                            label="Username"
-                            name="userName"
+                            id="email"
+                            label="Email address"
+                            name="email"
                             autoComplete="off"
-                            value={userName}
-                            onChange={(e) => setUserName(e.target.value)}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
 
                         <TextField
