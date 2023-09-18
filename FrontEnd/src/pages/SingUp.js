@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
+import {registerUser} from "../Services/RestApiCalls";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -71,7 +72,7 @@ const SignUp = () => {
 
     
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
 
         e.preventDefault();
 
@@ -86,9 +87,10 @@ const SignUp = () => {
             return;
         }
         else {
-            setPasswordError()
+            setPasswordError();
             setEmailError();
             console.log("New user is: ",NewUser);
+            registerUser(NewUser);
 
         }
     };
