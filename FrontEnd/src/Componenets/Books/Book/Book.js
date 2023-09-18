@@ -12,28 +12,28 @@ import { AddShoppingCart } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import useStyles from "./bookStyles";
 
-const Book = ({books, onAddToCart }) => {
+const Book = ({book, onAddToCart }) => {
     const classes = useStyles();
 
     //const product= [{id :1,name:"book1",price: 12,source:book1},];
     return (
         <Card className={classes.root}>
-            <Link to={`product-view/${books.id}`}>
+            <Link to={`product-view/${book.id}`}>
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
-                        image={books.source}
-                        title={books.name}
+                        image={book.source}
+                        title={book.name}
                     />
                 </CardActionArea>
             </Link>
             <CardContent>
                 <div className={classes.cardContent}>
-                    <Typography variant="h6">{books.name}</Typography>
+                    <Typography variant="h6">{book.name}</Typography>
                 </div>
                 <div className={classes.cardContent}>
                     <Typography variant="h6" color="secondary">
-                        <b>{books.price}</b>
+                        <b>{book.price}</b>
                     </Typography>
                 </div>
             </CardContent>
@@ -42,7 +42,7 @@ const Book = ({books, onAddToCart }) => {
                     variant="contained"
                     className={classes.button}
                     endIcon={<AddShoppingCart />}
-                    //onClick={() => onAddToCart(product.id, 1)}
+                    onClick={() => onAddToCart(book,1)}
                 >
                     <b>ADD TO CART</b>
                 </Button>
