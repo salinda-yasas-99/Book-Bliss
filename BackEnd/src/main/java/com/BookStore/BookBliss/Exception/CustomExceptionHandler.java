@@ -22,6 +22,18 @@ public class CustomExceptionHandler {
     return new ResponseEntity<>(customException,httpStatus);
     }
 
+    @ExceptionHandler(value = {EmailOrPasswordIncorrectException.class})
+    public ResponseEntity<Object> handleEmailOrPasswordIncorrectException(
+            EmailOrPasswordIncorrectException exception
+    ){
+        HttpStatus httpStatus =HttpStatus.FORBIDDEN;
+        CustomException customException = new CustomException(
+                exception.getMessage(),
+                httpStatus,
+                ZonedDateTime.now());
+        return new ResponseEntity<>(customException,httpStatus);
+    }
+
 
 
 }

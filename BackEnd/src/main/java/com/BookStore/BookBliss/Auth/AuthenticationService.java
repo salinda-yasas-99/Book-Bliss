@@ -4,13 +4,14 @@ import com.BookStore.BookBliss.Config.JwtService;
 import com.BookStore.BookBliss.Entity.Role;
 import com.BookStore.BookBliss.Entity.User;
 import com.BookStore.BookBliss.Exception.EmailAlreadyExistException;
+import com.BookStore.BookBliss.Exception.EmailOrPasswordIncorrectException;
 import com.BookStore.BookBliss.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
@@ -46,7 +47,7 @@ public class AuthenticationService {
 
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    /*public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -59,5 +60,26 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
+    }*/
+    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getEmail(),
+                            request.getPassword()
+                    )
+            );
+
+            var user = repository.findByEmail(request.getEmail())
+                    .orElseThrow();
+
+            var jwtToken = jwtService.generateToken(user);
+
+            return AuthenticationResponse.builder()
+                    .token(jwtToken)
+                    .build();
+        } catch (AuthenticationException ex) {
+            throw new EmailOrPasswordIncorrectException("Email or Password is incorrect");
+        }
     }
 }
