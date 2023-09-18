@@ -64,7 +64,7 @@ const SignUp = () => {
     const [emailError,setEmailError] =useState();
 
     const NewUser = {
-        "firstname": firstName ,
+        "firstname": firstName,
         "lastname": lastName,
         "email": email,
         "password": password
