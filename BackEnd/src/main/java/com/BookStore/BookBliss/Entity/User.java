@@ -21,10 +21,10 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue
-    private Integer id;
-    private String firstname;
-    private String lastname;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer userId;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
@@ -64,4 +64,9 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_user_id",referencedColumnName = "userId")
+    private List<Order> order;
+
 }

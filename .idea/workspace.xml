@@ -4,8 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce29170-e2d2-4242-8134-c4f15633c159" name="Changes" comment="">
+    <list default="true" id="6b75f563-83e7-4ae4-82fe-6943fcba705f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Controller/BookController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Entity/Book.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Entity/Category.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Entity/Courier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Entity/Order.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Entity/SubCategory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Repository/BookRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Repository/OrderRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Service/BookService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Auth/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Auth/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Entity/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +27,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -25,22 +38,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
-  <component name="ProjectId" id="2VUNq4EOFbD78nNnQRRYSl1gpwJ" />
+  <component name="ProjectId" id="2VXN1eEWEC3zwkzZGJGkULWzTaJ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -49,31 +53,15 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Assignment Projects/BackEnd/src/main/java/com/BookStore/BookBliss/Auth",
-    "nodejs_package_manager_path": "npm"
-  },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
-    ]
+    "spring.configuration.checksum": "ef36af7d8b9bdef51b7333898112f725"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Assignment Projects\BackEnd\src\main\java\com\BookStore\BookBliss\Auth" />
-      <recent name="D:\Assignment Projects\BackEnd\src\main\java\com\BookStore\BookBliss\Config" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.BookStore.BookBliss.Controller" />
-      <recent name="com.BookStore.BookBliss.Repository" />
-      <recent name="com.BookStore.BookBliss.Entity" />
-    </key>
-  </component>
   <component name="RunManager">
     <configuration name="BookBlissApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <option name="ACTIVE_PROFILES" />
       <envs>
-        <env name="db_user" value="root,db_password=password" />
+        <env name="db_user" value="root" />
+        <env name="db_password" value="password" />
       </envs>
       <module name="BookBliss" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.BookStore.BookBliss.BookBlissApplication" />
@@ -85,12 +73,13 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9ce29170-e2d2-4242-8134-c4f15633c159" name="Changes" comment="" />
-      <created>1694886896417</created>
+      <changelist id="6b75f563-83e7-4ae4-82fe-6943fcba705f" name="Changes" comment="" />
+      <created>1694978412380</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1694886896417</updated>
-      <workItem from="1694886902005" duration="5370000" />
+      <updated>1694978412380</updated>
+      <workItem from="1694978415767" duration="1471000" />
+      <workItem from="1695054009337" duration="12253000" />
     </task>
     <servers />
   </component>
