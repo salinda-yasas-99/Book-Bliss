@@ -10,9 +10,9 @@ import java.time.ZonedDateTime;
 @RestControllerAdvice
 public class CustomExceptionHandler {
 
-    @ExceptionHandler(value = {EmailNotFoundException.class})
+    @ExceptionHandler(value = {EmailAlreadyExistException.class})
     public ResponseEntity<Object> handleEmailNotFoundException(
-            EmailNotFoundException exception
+            EmailAlreadyExistException exception
     ){
         HttpStatus httpStatus =HttpStatus.CONFLICT;
         CustomException customException = new CustomException(

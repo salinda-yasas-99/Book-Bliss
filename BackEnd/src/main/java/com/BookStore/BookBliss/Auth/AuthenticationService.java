@@ -3,7 +3,7 @@ package com.BookStore.BookBliss.Auth;
 import com.BookStore.BookBliss.Config.JwtService;
 import com.BookStore.BookBliss.Entity.Role;
 import com.BookStore.BookBliss.Entity.User;
-import com.BookStore.BookBliss.Exception.EmailNotFoundException;
+import com.BookStore.BookBliss.Exception.EmailAlreadyExistException;
 import com.BookStore.BookBliss.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,7 +26,7 @@ public class AuthenticationService {
         Optional<User> existingUserOptional = repository.findByEmail(request.getEmail());
         if (existingUserOptional.isPresent()) {
             /*User existingUser = existingUserOptional.get();*/
-            throw new EmailNotFoundException("Email Already Exists");
+            throw new EmailAlreadyExistException("Email Already Exists");
         }
         else{
             var user= User.builder()
