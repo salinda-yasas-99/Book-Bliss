@@ -8,10 +8,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/demo-controller")
-@CrossOrigin(origins = "http://localhost:3000")
+/*@CrossOrigin(origins = "*",allowedHeaders = "*")*/
+
 public class DemoController {
     @GetMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<String>sayHello(){
         return ResponseEntity.ok("Hello from Secured endpoint");
     }
+
+   /* @GetMapping("/getHellow")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public String getHellow() {
+        return "salinda";
+
+    }*/
 }
+
+
