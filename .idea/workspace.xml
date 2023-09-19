@@ -5,19 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b75f563-83e7-4ae4-82fe-6943fcba705f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Controller/BookController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Entity/Book.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Entity/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Entity/Courier.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Entity/Order.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Entity/SubCategory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Repository/BookRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Repository/OrderRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Service/BookService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/DTO/BookDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Auth/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Auth/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Controller/BookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Entity/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Entity/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/BookStore/BookBliss/Service/BookService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,19 +35,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "spring.configuration.checksum": "ef36af7d8b9bdef51b7333898112f725"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;ef36af7d8b9bdef51b7333898112f725&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="BookBlissApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <option name="ACTIVE_PROFILES" />
@@ -79,7 +72,8 @@
       <option name="presentableId" value="Default" />
       <updated>1694978412380</updated>
       <workItem from="1694978415767" duration="1471000" />
-      <workItem from="1695054009337" duration="12253000" />
+      <workItem from="1695054009337" duration="12425000" />
+      <workItem from="1695139722772" duration="4962000" />
     </task>
     <servers />
   </component>
