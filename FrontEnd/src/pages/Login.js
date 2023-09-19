@@ -13,6 +13,7 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import Navbar from "../Componenets/Navbar";
+import Footer from "../Componenets/Footer";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,18 +50,38 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = () => {
     const classes = useStyles();
-    const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
+    const [passwordError,setPasswordError] = useState();
+    const [emailError,setEmailError] =useState();
+
+    const user ={
+        "email":email ,
+        "password":password
+    };
 
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission logic here
+
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+        if (!emailRegex.test(email)) {
+            setEmailError('Invalid email address');
+            return;
+        }
+        else{
+            setEmailError();
+            setPasswordError();
+            console.log("This is user ",user);
+        }
+
     };
 
     return (
         <Grid container component="main" className={classes.root}>
-            <Navbar />
+           {/* <Navbar />*/}
             <CssBaseline />
             <Grid item xs={false} sm={4} md={7} lg={4} xl={4} className={classes.image} />
             <Grid item xs={12} sm={8} md={5} lg={8} xl={4} component={Box} display="flex" justifyContent="center" alignItems="center" style={{paddingTop:"150px",}}>
@@ -71,18 +92,20 @@ const SignUp = () => {
                     <Typography component="h1" variant="h5">
                         Log In
                     </Typography>
-                    <form className={classes.form} onSubmit={handleFormSubmit}>
+                    <form className={classes.form} onSubmit={handleFormSubmit} method="POST">
                         <TextField
                             variant="outlined"
                             margin="normal"
+                            error={emailError && true}
+                            helperText={emailError}
                             required
                             fullWidth
-                            id="userName"
-                            label="Username"
-                            name="userName"
+                            id="email"
+                            label="Email address"
+                            name="email"
                             autoComplete="off"
-                            value={userName}
-                            onChange={(e) => setUserName(e.target.value)}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
 
                         <TextField
@@ -116,9 +139,12 @@ const SignUp = () => {
                         </Grid>
                     </Grid>
                 </div>
+
             </Grid>
             <Grid item xs={false} sm={false} md={false} lg={false} xl={4} className={classes.image} />
         </Grid>
+
+
     );
 };
 

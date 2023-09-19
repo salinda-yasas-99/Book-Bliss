@@ -1,17 +1,15 @@
-import React from "react";
-import Navbar from "../Componenets/Navbar";
+import React, {useState} from "react";
 import Books from "../Componenets/Books/Books";
-import Footer from "../Componenets/Footer";
 
 
 
 
-const Home  = () =>{
+const Home  = ({books , onAddToCart}) =>{
+
+
     return(
         <div className={"home"}>
-            <Navbar/>
-            <Books />
-            <Footer />
+            <Books books={books} onAddToCart={onAddToCart}/>
         </div>
     )
 

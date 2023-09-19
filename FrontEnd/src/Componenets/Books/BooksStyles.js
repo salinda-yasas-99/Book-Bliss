@@ -40,4 +40,8 @@ export default makeStyles((theme) => ({
         padding: "15px",
         borderRadius: "10px",
     },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+    },
 }));
