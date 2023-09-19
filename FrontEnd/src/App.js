@@ -16,10 +16,17 @@ import book3 from "./assets/Books/eng/eng-book_3.jpg";
 import book4 from "./assets/Books/eng/eng-book_4.jpg";
 import Footer from "./Componenets/Footer";
 import Checkout from "./Componenets/Checkout Form/Checkout/Checkout";
+import jwt_decode from "jwt-decode";
 import {countries} from "country-data";
 import PaymentForm from "./Componenets/Checkout Form/PaymentForm";
+import axios, {Axios} from "axios";
 
 function App() {
+
+    const [accessToken,setAccessToken] = useState("");
+
+    const [user,setUser] = useState();
+
 
     const [cart, setCart] = useState({
         id:1,
@@ -58,6 +65,86 @@ function App() {
         "totalPrice":23
         }
         */
+
+
+    /*
+    * const accessCheck = () => {
+  const token = localStorage.getItem('token');
+  const decodedToken = jwt_decode(JSON.stringify(token));
+  console.log("this is decoded token in app", decodedToken);
+
+  const TokenExpired = decodedToken ? Date.now() >= decodedToken.exp * 1000 : true;
+  if (TokenExpired) {
+    console.log("Token is expired");
+  } else {
+    setAccessToken(token);
+    const tokenUser = decodedToken.sub;
+    setUser(tokenUser);
+    // Move the console.log statements here
+    console.log("This is decoded user in app", tokenUser);
+    console.log("This is decoded access in app", token);
+  }
+}
+
+    * */
+
+    /*const accessCheck = async () => {
+        const token = localStorage.getItem('token');
+        const decodedToken = jwt_decode(JSON.stringify(token));
+        console.log("this is decoded token in app", decodedToken);
+
+        const TokenExpired = decodedToken ? Date.now() >= decodedToken.exp * 1000 : true;
+        if (TokenExpired) {
+            console.log("Token is expired");
+        } else {
+            setAccessToken(token);
+            const tokenUser = decodedToken.sub;
+            setUser(tokenUser);
+            console.log("This is decoded access in app", token);
+        }
+    }*/
+
+
+
+    const accessCheck = async () => {
+        const token = localStorage.getItem('token');
+        console.log('Stored token:', token);
+
+        if (!token) {
+            console.log('No token found in local storage.');
+            return;
+        }
+        try {
+            const decodedToken = jwt_decode(token);
+            //console.log('Decoded token:', decodedToken);
+
+            const TokenExpired = Date.now() >= decodedToken.exp * 1000;
+            if (TokenExpired) {
+                console.error('Token is expired');
+            } else {
+                setAccessToken(token);
+                const tokenUser = decodedToken.sub;
+                setUser(tokenUser);
+                // Call testEndpoint after setting accessToken
+                //await testEndpoint();
+            }
+        } catch (error) {
+            console.error('Error decoding token:', error.message);
+        }
+    };
+
+    useEffect(() => {
+        accessCheck();
+
+    }, []);
+
+
+    useEffect(() => {
+        // Check if user has a value before logging
+        if (user) {
+            console.log("This is decoded user in app", user);
+        }
+    }, [user]);
 
 
     const handleAddToCart = async (book, quantity) => {
@@ -159,7 +246,7 @@ function App() {
     })
     //console.log("This is countries"+countries.all);*/
 
-    // Use a useEffect hook to log the updated cart when it changes
+
     useEffect(() => {
         console.log("Cart has been updated:", JSON.stringify(cart));
 
@@ -255,7 +342,7 @@ function App() {
       <BrowserRouter>
           <Navbar
               totalItems={cart.totalItems}
-              user={"sali"}
+              user={user}
               /*handleDrawerToggle={handleDrawerToggle}*/
           />
 
@@ -273,7 +360,7 @@ function App() {
               </Route>
               <Route path={"checkout"} element={<Checkout cart={cart} order={newOrder} onCaptureCheckout={handleCaptureCheckout}/>} />
         </Routes>
-          <Footer />
+          <Footer/>
       </BrowserRouter>
   );
 }

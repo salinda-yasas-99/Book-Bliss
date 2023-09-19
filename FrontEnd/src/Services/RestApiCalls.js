@@ -1,17 +1,24 @@
 import axios from "axios";
+import jwt_decode from "jwt-decode";
+
+
 const API = axios.create({
     baseURL:"http://localhost:8080/api/v1",
 });
+
+export default API;
 
 
 export const registerUser = async (userData) =>{
     try{
         const response = await API.post("/auth/register",userData);
-        console.log(response);
-        const { token} = response.data;
-        console.log("this is signup token",token);
+        //console.log(response);
+        const  {token} = response.data;
+        //console.log("this is signup token",token);
         localStorage.setItem('token', token);
-        console.log("this is signup local storage token",localStorage.getItem('token'));
+        const decodedToken = jwt_decode(token);
+       // console.log("this is signup local storage token",localStorage.getItem('token'));
+        //console.log("this is decoded token",decodedToken);
         window.location.href = 'http://localhost:3000';
 
     }
@@ -33,7 +40,7 @@ export const registerUser = async (userData) =>{
         } else {
             // Something happened in setting up the request
             console.error('Error setting up the request:', error.message);
-            alert('Error setting up the request.');
+
         }
     }
 
@@ -44,15 +51,21 @@ export const logUser = async (user) =>{
 
         // Send a request to the server to log the user in using the JWT token
         const response = await API.post('http://localhost:8080/api/v1/auth/authenticate',user);
-        const { token} = response.data;
+        const  {token} = response.data;
         console.log("this is login token",token);
         localStorage.setItem('token', token);
         console.log("this is login local storage token",localStorage.getItem('token'));
+        const decodedToken =jwt_decode(JSON.stringify(token));
+        console.log("this is decoded token",decodedToken);
         window.location.href = 'http://localhost:3000';
 
 
     } catch (error) {
-        if (error.response) {
+        if (error.response.status === 403) {
+            // email or password wrong
+            alert(error.response.data.message);
+        }
+        else if (error.response) {
             // Handle server response errors, if any
             console.error('Axios Error:', error);
             alert('An error occurred during login.');
@@ -62,7 +75,6 @@ export const logUser = async (user) =>{
             alert('No response received from the server. Please check your network connection.');
         } else {
             console.error('Error setting up the request:', error.message);
-            alert('Error setting up the request.');
         }
     }
 

@@ -125,8 +125,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import Navbar from "../Componenets/Navbar";
-import Footer from "../Componenets/Footer";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -168,6 +167,32 @@ const useStyles = makeStyles((theme) => ({
 function UserProfile() {
     const classes = useStyles();
 
+   /* const testToken = localStorage.getItem('token');
+   /!* const testToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5pdGhAZ21haWwuY29tIiwiaWF0IjoxNjk1MTQ2Mzc5LCJleHAiOjE2OTUxNDc4MTl9.5AaSEYtr4_IWlYmaneFV9-xyqa2PT1OO-xl8NeXe-bb";*!/
+
+    console.log("web token in profile ", testToken);
+
+
+    const authAxios = axios.create({
+        headers: {
+            'Authorization': `Bearer ${testToken}`
+        },
+        withCredentials: true
+    });
+
+    console.log("This is authAxios",authAxios);
+    const testEndpoint = async () => {
+        try{
+            const  response = authAxios.get("http://localhost:8080/api/v1/demo-controller")
+                .then(console.log)
+                .catch(console.log);
+            console.log("this is demo data ",response.data);
+
+        }
+        catch(err){
+            console.error("This is error ",err);
+        }
+    };*/
     return (
         <div className={classes.root}>
           {/*  <Navbar />*/}
@@ -211,6 +236,7 @@ function UserProfile() {
                             variant="contained"
                             color="primary"
                             className={classes.editButton}
+
                         >
                             Edit Profile
                         </Button>
@@ -218,7 +244,6 @@ function UserProfile() {
 
                 </Container>
             </div>
-           {/* <Footer className={classes.footer} />*/}
         </div>
     );
 }
