@@ -12,13 +12,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/book-controller")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 public class BookController {
 
-    @Autowired
+
     private final BookService bookService;
 
     @GetMapping("/book")
+
     public List<BookDTO> AllBooks(){
         return bookService.getBooks();
     }
