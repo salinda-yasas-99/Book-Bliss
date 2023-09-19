@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -26,7 +27,6 @@ public class Book {
     private String description;
     private String author;
     private String language;
-    private Integer quantity;
 
     @ManyToMany(mappedBy = "books",fetch=FetchType.LAZY)
     @JsonBackReference
