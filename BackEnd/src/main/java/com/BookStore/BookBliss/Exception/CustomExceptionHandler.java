@@ -34,6 +34,18 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(customException,httpStatus);
     }
 
+    @ExceptionHandler(value = {BookAlreadyExistException.class})
+    public ResponseEntity<Object> handleBookAlreadyExistException(
+            BookAlreadyExistException exception
+    ){
+        HttpStatus httpStatus =HttpStatus.CONFLICT;
+        CustomException customException = new CustomException(
+                exception.getMessage(),
+                httpStatus,
+                ZonedDateTime.now());
+        return new ResponseEntity<>(customException,httpStatus);
+    }
+
 
 
 }
