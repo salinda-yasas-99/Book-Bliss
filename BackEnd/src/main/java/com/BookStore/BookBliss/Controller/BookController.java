@@ -20,7 +20,6 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping("/book")
-
     public List<BookDTO> AllBooks(){
         return bookService.getBooks();
     }
