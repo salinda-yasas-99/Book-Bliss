@@ -31,8 +31,8 @@ public class AuthenticationService {
         }
         else{
             var user= User.builder()
-                    .firstname(request.getFirstname())
-                    .lastname(request.getLastname())
+                    .firstName(request.getFirstname())
+                    .lastName(request.getLastname())
                     .email(request.getEmail())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role(Role.USER)
