@@ -21,14 +21,14 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderId;
-    private Integer orderQuantity;
+    private Integer totalQuantity;
     private BigDecimal totalPrice;
 
     @OneToOne(mappedBy = "order")
     private Courier courier;
 
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(name = "order_book",
+    @JoinTable(name = "orderBook",
     joinColumns = {
             @JoinColumn(name = "orderId",referencedColumnName = "orderId")
     },
