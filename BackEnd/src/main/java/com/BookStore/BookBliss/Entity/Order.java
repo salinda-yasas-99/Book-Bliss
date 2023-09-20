@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -23,6 +24,7 @@ public class Order {
     private Integer orderId;
     private Integer totalQuantity;
     private BigDecimal totalPrice;
+    private String orderStatus;
 
     @OneToOne(mappedBy = "order")
     private Courier courier;
@@ -37,5 +39,13 @@ public class Order {
     }
     )
     @JsonManagedReference
-    private List<Book> books;
+    private List<Book> orderedBooks = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
+
+    public List<Book> getOrderedBooks() {
+        return orderedBooks;
+    }
 }
