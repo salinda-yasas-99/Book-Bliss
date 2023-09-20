@@ -1,7 +1,7 @@
 package com.BookStore.BookBliss.Service;
 
 import com.BookStore.BookBliss.Entity.Book;
-import com.BookStore.BookBliss.Entity.Order;
+import com.BookStore.BookBliss.Entity.Reserve;
 import com.BookStore.BookBliss.Entity.User;
 import com.BookStore.BookBliss.Repository.BookRepository;
 import com.BookStore.BookBliss.Repository.OrderRepository;
@@ -15,33 +15,33 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class OrderService {
-    private OrderRepository orderRepository;
-    private UserRepository userRepository;
-    private BookRepository bookRepository;
+    private final OrderRepository orderRepository;
+    private final UserRepository userRepository;
+    private final BookRepository bookRepository;
 
     @Transactional
-    public Order placeOrder(Integer userId, Integer bookId) {
-        List<Order> pendingOrders = orderRepository.findPendingOrdersByUserId(userId);
+    public Reserve placeOrder(Integer userId, Integer bookId) {
+        List<Reserve> pendingReserves = orderRepository.findPendingOrdersByUserId(userId);
 
-        if (!pendingOrders.isEmpty()) {
-            Order pendingOrder = pendingOrders.get(0);
+        if (!pendingReserves.isEmpty()) {
+            Reserve pendingReserve = pendingReserves.get(0);
             Book book = bookRepository.findById(bookId)
                     .orElseThrow(() -> new IllegalArgumentException("Book not found."));
 
-            pendingOrder.getOrderedBooks().add(book);
-            return orderRepository.save(pendingOrder);
+            pendingReserve.getOrderedBooks().add(book);
+            return orderRepository.save(pendingReserve);
         } else {
             User user = userRepository.findById(userId)
                     .orElseThrow(() -> new IllegalArgumentException("User not found."));
             Book book = bookRepository.findById(bookId)
                     .orElseThrow(() -> new IllegalArgumentException("Book not found."));
 
-            Order newOrder = new Order();
-            newOrder.setUser(user);
-            newOrder.setOrderStatus("pending");
-            newOrder.getOrderedBooks().add(book);
+            Reserve newReserve = new Reserve();
+            newReserve.setUser(user);
+            newReserve.setReserveStatus("pending");
+            newReserve.getOrderedBooks().add(book);
 
-            return orderRepository.save(newOrder);
+            return orderRepository.save(newReserve);
         }
     }
 }
