@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import logo1 from "../../assets/Online-Bookstores-Better-than-Amazon-Featured.jpg"
 
 export default makeStyles((theme) => ({
     toolbar: theme.mixins.toolbar,
@@ -44,4 +45,10 @@ export default makeStyles((theme) => ({
         margin: theme.spacing(1),
         minWidth: 120,
     },
+    /*backgroundImage: {
+        backgroundImage:`url(${logo1})`, // Replace 'path_to_your_image.jpg' with the actual path to your image
+        backgroundSize: 'cover', // Adjust as needed
+        backgroundRepeat: 'no-repeat', // Adjust as needed
+        backgroundPosition: 'center center', // Adjust as needed
+    }*/
 }));

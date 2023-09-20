@@ -16,6 +16,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import logo1 from "../../assets/Online-Bookstores-Better-than-Amazon-Featured.jpg";
 import "./SingleBookView/bookView.css";
 
+
+
 const Books = ({ books, onAddToCart }) => {
     const classes = useStyles();
 
@@ -31,12 +33,16 @@ const Books = ({ books, onAddToCart }) => {
             <div className={classes.toolbar} />
             <Carousel fade infiniteLoop useKeyboardArrows autoPlay>
                 <Carousel.Item>
-                    <div className={classes.backgroundContainer}>
+                    <div className={classes.backgroundImage}>
                         <img className="d-block w-100" src={logo1} alt="slide" />
                         <Carousel.Caption>
                             <Grid container spacing={2} alignItems="center"  className={"main-container"}>
-                                <Grid item xs={6} sm={6} md={6} lg={6} xl={4} >
-                                    <div className={classes.searchs}>
+                                <Grid item xs={1} sm={1} md={1} lg={1} xl={1} />
+                               {/* style={{backgroundColor:"blue"}}*/}
+                                <Grid item xs={10} sm={10} md={10} lg={10} xl={10} >
+                                    {/*<Grid item xs={6} sm={6} md={6} lg={6} xl={10} >*/}
+                                   {/* style={{backgroundColor:"yellow"}}*/}
+                                    <div className={classes.searchs} >
                                         <Input
                                             className={classes.searchb}
                                             type="text"
@@ -51,41 +57,50 @@ const Books = ({ books, onAddToCart }) => {
                                             }
                                         />
                                     </div>
+                                    {/*style={{backgroundColor:"red",display:"flex",justifyContent:"space-evenly"}}*/}
+                                    <div className={classes.searchs} style={{display:"flex",justifyContent:"space-evenly"}}>
+                                        <div>
+                                            <FormControl className={classes.formControl} >
+                                                <InputLabel>Category</InputLabel>
+                                                <Select
+                                                    value={selectedCategory}
+                                                    onChange={(event) => {
+                                                        setSelectedCategory(event.target.value);
+                                                    }}
+                                                    style={{ minWidth: "250px" }}
+
+                                                >
+                                                    {categories.map((category) => (
+                                                        <MenuItem key={category} value={category}>
+                                                            {category}
+                                                        </MenuItem>
+                                                    ))}
+                                                </Select>
+                                            </FormControl>
+                                        </div>
+                                        <div>
+                                            <FormControl className={classes.formControl}>
+                                                <InputLabel>Sub-category</InputLabel>
+                                                <Select
+                                                    value={selectedSubCategory}
+                                                    onChange={(event) => {
+                                                        setSelectedSubCategory(event.target.value);
+                                                    }}
+                                                    style={{ minWidth: "250px" }}
+                                                >
+                                                    {subCategories.map((subCategory) => (
+                                                        <MenuItem key={subCategory} value={subCategory}>
+                                                            {subCategory}
+                                                        </MenuItem>
+                                                    ))}
+                                                </Select>
+                                            </FormControl>
+                                        </div>
+
+                                    </div>
                                 </Grid>
-                                <Grid item xs={3} sm={3} md={3} lg={3} xl={4} >
-                                    <FormControl className={classes.formControl}>
-                                        <InputLabel>Category</InputLabel>
-                                        <Select
-                                            value={selectedCategory}
-                                            onChange={(event) => {
-                                                setSelectedCategory(event.target.value);
-                                            }}
-                                        >
-                                            {categories.map((category) => (
-                                                <MenuItem key={category} value={category}>
-                                                    {category}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
-                                <Grid item xs={3} sm={3} md={3} lg={3} xl={4} >
-                                    <FormControl className={classes.formControl}>
-                                        <InputLabel>Sub-category</InputLabel>
-                                        <Select
-                                            value={selectedSubCategory}
-                                            onChange={(event) => {
-                                                setSelectedSubCategory(event.target.value);
-                                            }}
-                                        >
-                                            {subCategories.map((subCategory) => (
-                                                <MenuItem key={subCategory} value={subCategory}>
-                                                    {subCategory}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
+                                <Grid item xs={1} sm={1} md={1} lg={1} xl={1} />
+
                             </Grid>
                         </Carousel.Caption>
                     </div>

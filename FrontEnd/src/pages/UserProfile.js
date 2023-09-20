@@ -167,8 +167,7 @@ const useStyles = makeStyles((theme) => ({
 function UserProfile() {
     const classes = useStyles();
 
-   /* const testToken = localStorage.getItem('token');
-   /!* const testToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5pdGhAZ21haWwuY29tIiwiaWF0IjoxNjk1MTQ2Mzc5LCJleHAiOjE2OTUxNDc4MTl9.5AaSEYtr4_IWlYmaneFV9-xyqa2PT1OO-xl8NeXe-bb";*!/
+    const testToken = localStorage.getItem('token');
 
     console.log("web token in profile ", testToken);
 
@@ -183,7 +182,7 @@ function UserProfile() {
     console.log("This is authAxios",authAxios);
     const testEndpoint = async () => {
         try{
-            const  response = authAxios.get("http://localhost:8080/api/v1/demo-controller")
+            const  response = authAxios.get("http://localhost:8080/api/v1/book-controller/book")
                 .then(console.log)
                 .catch(console.log);
             console.log("this is demo data ",response.data);
@@ -192,10 +191,9 @@ function UserProfile() {
         catch(err){
             console.error("This is error ",err);
         }
-    };*/
+    };
     return (
         <div className={classes.root}>
-          {/*  <Navbar />*/}
             <div className={classes.content}>
                 <Container component="main" maxWidth="xs">
                     <div className={classes.root}>
@@ -236,12 +234,12 @@ function UserProfile() {
                             variant="contained"
                             color="primary"
                             className={classes.editButton}
+                            onClick={testEndpoint}
 
                         >
                             Edit Profile
                         </Button>
                     </div>
-
                 </Container>
             </div>
         </div>
