@@ -20,6 +20,7 @@ import jwt_decode from "jwt-decode";
 import {countries} from "country-data";
 import PaymentForm from "./Componenets/Checkout Form/PaymentForm";
 import axios, {Axios} from "axios";
+import OrderPage from "./pages/OrderPage";
 
 function App() {
 
@@ -358,6 +359,7 @@ function App() {
                                                   onUpdateCartQty={handleUpdateCartQty}
                                                   onRemoveFromCart={handleRemoveFromCart}/>}></Route>
               </Route>
+            <Route path={"order"} element={<OrderPage/>} />
               <Route path={"checkout"} element={<Checkout cart={cart} order={newOrder} onCaptureCheckout={handleCaptureCheckout}/>} />
         </Routes>
           <Footer/>
