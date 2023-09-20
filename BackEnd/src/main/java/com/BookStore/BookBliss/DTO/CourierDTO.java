@@ -1,21 +1,26 @@
-package com.BookStore.BookBliss.Entity;
+package com.BookStore.BookBliss.DTO;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/*
+this is shippingdata in Paymentform {
+"firstName":"Salinda",
+"lastName":"Yasas",
+"address":"142/1,Wewalduwa road, Kelaniya",
+"email":"salindasym@gmail.com",
+"city":"Kelaniya",
+"zip":"11600",
+"shippingCountry":"Angola",
+"shippingOption":{"type":"Domestic","price":500}}
+* */
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name="courier")
-public class Courier {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@NoArgsConstructor
+public class CourierDTO {
     private Integer courierId;
     private String firstName;
     private String lastName;
@@ -26,8 +31,4 @@ public class Courier {
     private String shippingCountry;
     private String shippingOption;
     private float price;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="fk_order_id")
-    private Order order;
 }
