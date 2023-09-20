@@ -46,6 +46,18 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(customException,httpStatus);
     }
 
+    @ExceptionHandler(value = {CategoryAlreadyExistsException.class})
+    public ResponseEntity<Object> handleCategoryAlreadyExistException(
+            CategoryAlreadyExistsException exception
+    ){
+        HttpStatus httpStatus =HttpStatus.CONFLICT;
+        CustomException customException = new CustomException(
+                exception.getMessage(),
+                httpStatus,
+                ZonedDateTime.now());
+        return new ResponseEntity<>(customException,httpStatus);
+    }
+
 
 
 
