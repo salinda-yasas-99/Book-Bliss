@@ -20,6 +20,7 @@ public class BookDTO {
     private String author;
     private String category;
     private String subCategory;
+    private String language;
 
     /* const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Novel"},
     {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book",author:"Martin",category:"english",subCategory:"Mystery"},

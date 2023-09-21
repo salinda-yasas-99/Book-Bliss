@@ -23,12 +23,14 @@ public class Book {
     private String bookName;
     private BigDecimal price;
     private String source;
+    @Column(length = 2000)
     private String description;
     private String author;
+    private String language;
 
-    @ManyToMany(mappedBy = "books",fetch=FetchType.LAZY)
+    @ManyToMany(mappedBy = "reservedBooks",fetch=FetchType.LAZY)
     @JsonBackReference
-    private List<Order> orders;
+    private List<Reserve> reserves;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_category_id",referencedColumnName = "categoryId")
