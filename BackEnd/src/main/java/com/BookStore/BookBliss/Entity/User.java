@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -65,8 +66,8 @@ public class User implements UserDetails {
         return true;
     }
 
-//    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
 //    @JoinColumn(name = "fk_user_id",referencedColumnName = "userId")
-//    private List<Order> order;
+    private Set<Reserve> reserves;
 
 }

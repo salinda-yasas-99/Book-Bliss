@@ -41,7 +41,7 @@ public class BookService {
 
     private BookDTO convertToDTO(Book book) {
         BookDTO bookDTO = new BookDTO();
-        bookDTO.setId(book.getBookId());
+        bookDTO.setId(book.getId());
         bookDTO.setName(book.getBookName());
         bookDTO.setPrice(book.getPrice());
         bookDTO.setSource(book.getSource());

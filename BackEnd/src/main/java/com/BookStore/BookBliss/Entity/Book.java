@@ -8,18 +8,18 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="book")
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer bookId;
+    private Integer id;
     private String bookName;
     private BigDecimal price;
     private String source;
@@ -27,10 +27,10 @@ public class Book {
     private String author;
     private String language;
 
-    @ManyToMany(mappedBy = "reservedBooks",fetch=FetchType.LAZY)
-    @JsonBackReference
-    private List<Reserve> reserves;
-
+//    @ManyToMany(mappedBy = "reservedBooks",fetch=FetchType.LAZY)
+//    @JsonBackReference
+//    private List<Reserve> reserves;
+//
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_category_id",referencedColumnName = "categoryId")
     private Category category;
@@ -38,4 +38,7 @@ public class Book {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_sub_category_id",referencedColumnName = "subCategoryId")
     private SubCategory subCategory;
+
+    @ManyToMany(mappedBy = "books",fetch = FetchType.LAZY)
+    private List<Reserve> reserves;
 }
