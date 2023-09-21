@@ -23,6 +23,7 @@ public class Book {
     private String bookName;
     private BigDecimal price;
     private String source;
+    @Column(length = 2000)
     private String description;
     private String author;
     private String language;

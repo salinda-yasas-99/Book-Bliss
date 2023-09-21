@@ -17,10 +17,11 @@ public class BookController {
 
     private final BookService bookService;
 
-    @GetMapping("/book")
+    @GetMapping("/books")
     public List<BookDTO> AllBooks(){
         return bookService.getBooks();
     }
+
 
     @PostMapping("/book")
     public ResponseEntity<String>addBook(
