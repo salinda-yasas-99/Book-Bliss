@@ -80,6 +80,51 @@ export const logUser = async (user) =>{
 
 }
 
+export const getBooks = async () => {
+    try {
+        const response = await API.get("http://localhost:8080/api/v1/book-controller/books");
+        console.log(response);
+        return response.data; // assuming the data is in the 'data' property of the response
+    } catch (err) {
+        console.log("This is error", err);
+    }
+};
+
+export const getCategories = async () => {
+    try {
+        const response = await API.get("http://localhost:8080/api/v1/cat-controller/categories");
+        console.log(response);
+        return response.data; // assuming the data is in the 'data' property of the response
+    } catch (err) {
+        console.log("This is error", err);
+    }
+};
+
+export const getSubCategories = async () => {
+    try {
+        const response = await API.get("http://localhost:8080/api/v1/sub-controller/subCategories");
+        console.log("this is category response",response.data);
+        return response.data; // assuming the data is in the 'data' property of the response
+    } catch (err) {
+        console.log("This is error", err);
+    }
+};
+
+
+
+
+/*export const getBooks =async () =>{
+    try{
+        const response = await API.get("http://localhost:8080/api/v1/book-controller/books")
+            .then(console.log)
+            .catch(console.log);
+    }
+    catch (err){
+        console.log("This is error", err);
+    }
+
+};*/
+
 /*
 *  const testEndpoint = async () => {
         try{
@@ -94,26 +139,3 @@ export const logUser = async (user) =>{
         }
     };
 * */
-
-export const getBooks = async () => {
-    try {
-        const response = await API.get("http://localhost:8080/api/v1/book-controller/books");
-        console.log(response);
-        return response.data; // assuming the data is in the 'data' property of the response
-    } catch (err) {
-        console.log("This is error", err);
-    }
-};
-
-
-/*export const getBooks =async () =>{
-    try{
-        const response = await API.get("http://localhost:8080/api/v1/book-controller/books")
-            .then(console.log)
-            .catch(console.log);
-    }
-    catch (err){
-        console.log("This is error", err);
-    }
-
-};*/

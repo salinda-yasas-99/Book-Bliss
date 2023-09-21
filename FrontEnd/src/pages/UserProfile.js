@@ -239,6 +239,15 @@ function UserProfile() {
                         >
                             Edit Profile
                         </Button>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            className={classes.editButton}
+                            onClick={testEndpoint}
+
+                        >
+                            View My Orders
+                        </Button>
                     </div>
                 </Container>
             </div>
