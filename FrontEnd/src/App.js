@@ -346,7 +346,8 @@ function App() {
               user={user}
               /*handleDrawerToggle={handleDrawerToggle}*/
           />
-
+          {/*<div style={{ minHeight: 'calc(100vh - 64px)', }}>*/}
+          <div style={{ paddingTop: '64px', minHeight: 'calc(100vh - 64px)', overflowY: 'auto' }}>
         <Routes>
           <Route path={"/"}>
 
@@ -362,6 +363,7 @@ function App() {
             <Route path={"order"} element={<OrderPage/>} />
               <Route path={"checkout"} element={<Checkout cart={cart} order={newOrder} onCaptureCheckout={handleCaptureCheckout}/>} />
         </Routes>
+          </div>
           <Footer/>
       </BrowserRouter>
   );
