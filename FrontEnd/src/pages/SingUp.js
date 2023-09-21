@@ -13,21 +13,23 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import {registerUser} from "../Services/RestApiCalls";
+import mainImg from "../assets/background/20.png";
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
         height: '100vh',
     },
+
     image: {
-        backgroundImage: 'url("/path-to-your-background-image.jpg")',
+      /*  backgroundImage:`url(${mainImg})`,
         backgroundRepeat: 'no-repeat',
         backgroundColor:
             theme.palette.type === 'light'
                 ? theme.palette.grey[50]
                 : theme.palette.grey[900],
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundPosition: 'center',*/
     },
     paper: {
         display: 'flex',

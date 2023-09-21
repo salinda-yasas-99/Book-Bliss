@@ -7,6 +7,7 @@ import CartMain from "./pages/CartPage";
 import BookView from "./Componenets/Books/SingleBookView/BookView";
 import Navbar from "./Componenets/Navbar"
 
+
 import UserProfile from "./pages/UserProfile";
 import Cart from "./Componenets/Cart/Cart";
 import React, {useEffect, useState} from "react";
@@ -16,10 +17,22 @@ import book3 from "./assets/Books/eng/eng-book_3.jpg";
 import book4 from "./assets/Books/eng/eng-book_4.jpg";
 import Footer from "./Componenets/Footer";
 import Checkout from "./Componenets/Checkout Form/Checkout/Checkout";
+import jwt_decode from "jwt-decode";
 import {countries} from "country-data";
 import PaymentForm from "./Componenets/Checkout Form/PaymentForm";
+import axios, {Axios} from "axios";
+import OrderPage from "./pages/OrderPage";
+import {getBooks} from "./Services/RestApiCalls";
+import img from "./assets/Books/eng/eng-book_1.jpg";
+
 
 function App() {
+
+    const [accessToken,setAccessToken] = useState("");
+    const [BooksArray, setBooksArray] = useState([]);
+
+    const [user,setUser] = useState();
+
 
     const [cart, setCart] = useState({
         id:1,
@@ -30,10 +43,10 @@ function App() {
 
     const [newOrder,setNewOrder] = useState({})
 
-    const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Novel"},
+    /*const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Novel"},
         {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book",author:"Martin",category:"english",subCategory:"Mystery"},
         {id :30,name:"book3",price: 13,source:book3 , desc:"This is my book",author:"Martin",category:"english",subCategory:"Adventure"},
-        {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Grade 10"}];
+        {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Grade 10"}];*/
 
 
     /*{
@@ -58,6 +71,103 @@ function App() {
         "totalPrice":23
         }
         */
+
+
+    /*
+    * const accessCheck = () => {
+  const token = localStorage.getItem('token');
+  const decodedToken = jwt_decode(JSON.stringify(token));
+  console.log("this is decoded token in app", decodedToken);
+
+  const TokenExpired = decodedToken ? Date.now() >= decodedToken.exp * 1000 : true;
+  if (TokenExpired) {
+    console.log("Token is expired");
+  } else {
+    setAccessToken(token);
+    const tokenUser = decodedToken.sub;
+    setUser(tokenUser);
+    // Move the console.log statements here
+    console.log("This is decoded user in app", tokenUser);
+    console.log("This is decoded access in app", token);
+  }
+}
+
+    * */
+
+    /*const accessCheck = async () => {
+        const token = localStorage.getItem('token');
+        const decodedToken = jwt_decode(JSON.stringify(token));
+        console.log("this is decoded token in app", decodedToken);
+
+        const TokenExpired = decodedToken ? Date.now() >= decodedToken.exp * 1000 : true;
+        if (TokenExpired) {
+            console.log("Token is expired");
+        } else {
+            setAccessToken(token);
+            const tokenUser = decodedToken.sub;
+            setUser(tokenUser);
+            console.log("This is decoded access in app", token);
+        }
+    }*/
+
+
+
+    const accessCheck = async () => {
+        const token = localStorage.getItem('token');
+        console.log('Stored token:', token);
+
+        if (!token) {
+            console.log('No token found in local storage.');
+            return;
+        }
+        try {
+            const decodedToken = jwt_decode(token);
+            //console.log('Decoded token:', decodedToken);
+
+            const TokenExpired = Date.now() >= decodedToken.exp * 1000;
+            if (TokenExpired) {
+                console.error('Token is expired');
+            } else {
+                setAccessToken(token);
+                const tokenUser = decodedToken.sub;
+                setUser(tokenUser);
+                // Call testEndpoint after setting accessToken
+                //await testEndpoint();
+            }
+        } catch (error) {
+            console.error('Error decoding token:', error.message);
+        }
+    };
+
+
+    useEffect(() => {
+        const fetchBooks = async () => {
+            const books = await getBooks();
+            setBooksArray(books);
+        };
+
+        fetchBooks();
+    }, []);
+
+    useEffect(() => {
+        console.log("This is books array passed ", BooksArray);
+    }, [BooksArray]);
+
+
+
+
+    useEffect(() => {
+        accessCheck();
+
+    }, []);
+
+
+    useEffect(() => {
+        // Check if user has a value before logging
+        if (user) {
+            console.log("This is decoded user in app", user);
+        }
+    }, [user]);
 
 
     const handleAddToCart = async (book, quantity) => {
@@ -159,7 +269,7 @@ function App() {
     })
     //console.log("This is countries"+countries.all);*/
 
-    // Use a useEffect hook to log the updated cart when it changes
+
     useEffect(() => {
         console.log("Cart has been updated:", JSON.stringify(cart));
 
@@ -249,31 +359,32 @@ function App() {
 
 
 
-
   return (
 
       <BrowserRouter>
           <Navbar
               totalItems={cart.totalItems}
-              user={"sali"}
-              /*handleDrawerToggle={handleDrawerToggle}*/
+              user={user}
           />
-
+          {/*<div style={{ paddingTop: '64px', minHeight: 'calc(100vh - 64px)', overflowY: 'auto' }}>*/}
+          <div style={{ minHeight: 'calc(100vh - 64px)', overflowY: 'auto' }}>
         <Routes>
           <Route path={"/"}>
 
               <Route index element={<Home books={BooksArray} onAddToCart={handleAddToCart}/>} />
               <Route path={"login"} element={<Login />} />
               <Route path={"signup"} element={<SignUp />} />
-              <Route path="product-view/:id" element={<BookView />} />
+              <Route path="product-view/:id" element={<BookView/>} />
               <Route path="profile" element={<UserProfile />} />
               <Route path={"cart"} element={<CartMain cart={cart}
                                                   onUpdateCartQty={handleUpdateCartQty}
                                                   onRemoveFromCart={handleRemoveFromCart}/>}></Route>
               </Route>
+            <Route path={"order"} element={<OrderPage/>} />
               <Route path={"checkout"} element={<Checkout cart={cart} order={newOrder} onCaptureCheckout={handleCaptureCheckout}/>} />
         </Routes>
-          <Footer />
+          </div>
+          <Footer/>
       </BrowserRouter>
   );
 }

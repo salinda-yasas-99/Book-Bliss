@@ -17,7 +17,10 @@ import { Link } from "react-router-dom";
 import logo from "../assets/circles.png";
 import useStyles from "./Styles";
 
-const Navbar = ({ totalItems, user, handleLogout }) => {
+
+
+/*const Navbar = ({ totalItems, user, handleLogout }) => {*/
+const Navbar = ({ totalItems, user }) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -31,6 +34,12 @@ const Navbar = ({ totalItems, user, handleLogout }) => {
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
+
+    const handleLogout = () => {
+        // Clear the token from local storage
+        localStorage.removeItem('token');
+        window.location.href = '/login';
+    }
 
    /* const renderUserMenu = (
         <div>
@@ -160,7 +169,7 @@ const Navbar = ({ totalItems, user, handleLogout }) => {
                                 >
                                     Sign In
                                 </Button>
-                                <IconButton
+                                {/*<IconButton
                                     component={Link}
                                     to="/cart"
                                     aria-label="Show cart items"
@@ -169,7 +178,7 @@ const Navbar = ({ totalItems, user, handleLogout }) => {
                                     <Badge badgeContent={totalItems} color="secondary">
                                         <ShoppingCart />
                                     </Badge>
-                                </IconButton>
+                                </IconButton>*/}
                             </>
 
                         )}
