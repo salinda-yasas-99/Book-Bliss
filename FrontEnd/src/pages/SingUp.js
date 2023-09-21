@@ -13,7 +13,7 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import {registerUser} from "../Services/RestApiCalls";
-import mainImg from "../assets/backgroun/20.png";
+import mainImg from "../assets/background/20.png";
 
 
 const useStyles = makeStyles((theme) => ({

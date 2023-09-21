@@ -13,10 +13,7 @@ import Book from "./Book/Book";
 import useStyles from "./BooksStyles";
 import Carousel from "react-bootstrap/Carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import logo1 from "../../assets/Online-Bookstores-Better-than-Amazon-Featured.jpg";
 import "./SingleBookView/bookView.css";
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-/*import { styled } from '@mui/material/styles';*/
 
 
 

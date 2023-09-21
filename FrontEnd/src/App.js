@@ -7,6 +7,7 @@ import CartMain from "./pages/CartPage";
 import BookView from "./Componenets/Books/SingleBookView/BookView";
 import Navbar from "./Componenets/Navbar"
 
+
 import UserProfile from "./pages/UserProfile";
 import Cart from "./Componenets/Cart/Cart";
 import React, {useEffect, useState} from "react";
@@ -21,10 +22,14 @@ import {countries} from "country-data";
 import PaymentForm from "./Componenets/Checkout Form/PaymentForm";
 import axios, {Axios} from "axios";
 import OrderPage from "./pages/OrderPage";
+import {getBooks} from "./Services/RestApiCalls";
+import img from "./assets/Books/eng/eng-book_1.jpg";
+
 
 function App() {
 
     const [accessToken,setAccessToken] = useState("");
+    const [BooksArray, setBooksArray] = useState([]);
 
     const [user,setUser] = useState();
 
@@ -38,10 +43,10 @@ function App() {
 
     const [newOrder,setNewOrder] = useState({})
 
-    const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Novel"},
+    /*const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Novel"},
         {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book",author:"Martin",category:"english",subCategory:"Mystery"},
         {id :30,name:"book3",price: 13,source:book3 , desc:"This is my book",author:"Martin",category:"english",subCategory:"Adventure"},
-        {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Grade 10"}];
+        {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Grade 10"}];*/
 
 
     /*{
@@ -133,6 +138,23 @@ function App() {
             console.error('Error decoding token:', error.message);
         }
     };
+
+
+    useEffect(() => {
+        const fetchBooks = async () => {
+            const books = await getBooks();
+            setBooksArray(books);
+        };
+
+        fetchBooks();
+    }, []);
+
+    useEffect(() => {
+        console.log("This is books array passed ", BooksArray);
+    }, [BooksArray]);
+
+
+
 
     useEffect(() => {
         accessCheck();
@@ -337,24 +359,22 @@ function App() {
 
 
 
-
   return (
 
       <BrowserRouter>
           <Navbar
               totalItems={cart.totalItems}
               user={user}
-              /*handleDrawerToggle={handleDrawerToggle}*/
           />
-          {/*<div style={{ minHeight: 'calc(100vh - 64px)', }}>*/}
-          <div style={{ paddingTop: '64px', minHeight: 'calc(100vh - 64px)', overflowY: 'auto' }}>
+          {/*<div style={{ paddingTop: '64px', minHeight: 'calc(100vh - 64px)', overflowY: 'auto' }}>*/}
+          <div style={{ minHeight: 'calc(100vh - 64px)', overflowY: 'auto' }}>
         <Routes>
           <Route path={"/"}>
 
               <Route index element={<Home books={BooksArray} onAddToCart={handleAddToCart}/>} />
               <Route path={"login"} element={<Login />} />
               <Route path={"signup"} element={<SignUp />} />
-              <Route path="product-view/:id" element={<BookView />} />
+              <Route path="product-view/:id" element={<BookView/>} />
               <Route path="profile" element={<UserProfile />} />
               <Route path={"cart"} element={<CartMain cart={cart}
                                                   onUpdateCartQty={handleUpdateCartQty}

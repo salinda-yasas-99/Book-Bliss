@@ -80,3 +80,40 @@ export const logUser = async (user) =>{
 
 }
 
+/*
+*  const testEndpoint = async () => {
+        try{
+            const  response = authAxios.get("http://localhost:8080/api/v1/book-controller/book")
+                .then(console.log)
+                .catch(console.log);
+            console.log("this is demo data ",response.data);
+
+        }
+        catch(err){
+            console.error("This is error ",err);
+        }
+    };
+* */
+
+export const getBooks = async () => {
+    try {
+        const response = await API.get("http://localhost:8080/api/v1/book-controller/books");
+        console.log(response);
+        return response.data; // assuming the data is in the 'data' property of the response
+    } catch (err) {
+        console.log("This is error", err);
+    }
+};
+
+
+/*export const getBooks =async () =>{
+    try{
+        const response = await API.get("http://localhost:8080/api/v1/book-controller/books")
+            .then(console.log)
+            .catch(console.log);
+    }
+    catch (err){
+        console.log("This is error", err);
+    }
+
+};*/

@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
-import logo1 from "../../assets/backgroun/17.png"
-import mainImg from "../../assets/backgroun/20.png"
+import logo1 from "../../assets/background/17.png"
+import mainImg from "../../assets/background/20.png"
 
 export default makeStyles((theme) => ({
     toolbar: theme.mixins.toolbar,

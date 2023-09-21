@@ -3,11 +3,8 @@ import { Container, Grid, Button, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./bookView.css";
+import {getBooks} from "../../../Services/RestApiCalls";
 
-import book1 from "../../../assets/Books/eng/eng-book_1.jpg";
-import book2 from "../../../assets/Books/eng/eng-book_2.jpg";
-import book3 from "../../../assets/Books/eng/eng-book_3.jpg";
-import book4 from "../../../assets/Books/eng/eng-book_4.jpg";
 
 
 const createMarkup = (text) => {
@@ -16,26 +13,52 @@ const createMarkup = (text) => {
 
 const BookView = () => {
 
-    const books= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Novel"},
-        {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book",author:"Martin",category:"english",subCategory:"Mystery"},
-        {id :30,name:"book3",price: 13,source:book3 , desc:"This is my book",author:"Martin",category:"english",subCategory:"Adventure"},
-        {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Grade 10"}];
+    const [books,setBooks] = useState([]);
+    const [book, setBook] = useState([]);
 
-    const [book, setBook] = useState({});
+
+    useEffect(() => {
+        const fetchBooks = async () => {
+            const books = await getBooks();
+            setBooks(books);
+        };
+
+        fetchBooks();
+    }, []);
+
+
+   /* useEffect(() => {
+        console.log("This books array is book view",books);
+    }, []);*/
+
+
+   /* useEffect(() => {
+        if (booksArray) {
+            setBooks(booksArray);
+        }
+    }, [books]);
+
+    useEffect(() => {
+        console.log("This books array is book view",books);
+    }, []);*/
 
     const fetchProduct = async (id) => {
 
         console.log("this is id "+id);
         const resultBook = books.find((product) => product.id === parseInt(id));
-        console.log(resultBook);
+        console.log("this is result book",resultBook);
 
         if (resultBook) {
-            const { name, price, source, desc } = resultBook;
+            const { name, price, source, desc,author ,category,subCategory,language} = resultBook;
             setBook({
                 name,
                 price,
                 source,
                 desc,
+                author,
+                category,
+                subCategory,
+                language
             });
         } else {
             console.log('Book not found');
@@ -44,8 +67,15 @@ const BookView = () => {
 
     useEffect(() => {
         const id = window.location.pathname.split("/");
+        console.log("This is id in book view", id);
         fetchProduct(id[2]);
-    }, []);
+    }, [books]);
+
+   /* useEffect(() => {
+        const id = window.location.pathname.split("/");
+        console.log("This is id in book view",id);
+        fetchProduct(id[2]);
+    }, []);*/
 
     return (
         <Container className="product-view">
@@ -57,12 +87,13 @@ const BookView = () => {
                     <Typography variant="h2">
                         <b>{book.name}</b>
                     </Typography>
-                    <Typography
-                        variant="p"
-                        dangerouslySetInnerHTML={createMarkup(book.desc)}
-                    />
+
+                    <Typography variant="h6">By {book.author}</Typography>
+                    <Typography variant="p" >Language :{book.language}</Typography>
+                    <br />
+                    <Typography variant="p" dangerouslySetInnerHTML={createMarkup(book.desc)}/>
                     <Typography variant="h3" color="secondary">
-                        Price: <b> {book.price} </b>
+                        Price: <b> Rs.{book.price} </b>
                     </Typography>
                     <br />
                     <Grid container spacing={4}>
