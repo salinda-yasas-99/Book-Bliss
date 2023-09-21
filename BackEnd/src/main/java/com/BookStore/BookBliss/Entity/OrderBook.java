@@ -17,7 +17,7 @@ public class OrderBook {
 
     @ManyToOne
     @JoinColumn(name = "orderId")
-    private Order order;
+    private Reserve reserve;
 
     @ManyToOne
     @JoinColumn(name = "bookId")

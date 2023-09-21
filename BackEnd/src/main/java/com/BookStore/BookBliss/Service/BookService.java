@@ -49,6 +49,7 @@ public class BookService {
         bookDTO.setAuthor(book.getAuthor());
         bookDTO.setCategory(book.getCategory().getCategoryName());
         bookDTO.setSubCategory(book.getSubCategory().getSubCategoryName());
+        bookDTO.setLanguage(book.getLanguage());
         return bookDTO;
     }
 

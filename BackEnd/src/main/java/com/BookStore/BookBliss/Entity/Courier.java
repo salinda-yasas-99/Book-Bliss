@@ -28,6 +28,6 @@ public class Courier {
     private float price;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="fk_order_id")
-    private Order order;
+    @JoinColumn(name="fk_reserve_id")
+    private Reserve reserve;
 }

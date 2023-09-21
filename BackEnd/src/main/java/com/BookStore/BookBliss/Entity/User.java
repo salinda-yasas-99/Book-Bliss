@@ -65,8 +65,8 @@ public class User implements UserDetails {
         return true;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_user_id",referencedColumnName = "userId")
-    private List<Order> order;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "fk_user_id",referencedColumnName = "userId")
+//    private List<Order> order;
 
 }
