@@ -24,8 +24,8 @@ public class ReserveService {
     private final BookRepository bookRepository;
 
     @Transactional
-    public ReserveDTO placeOrder(Integer userId, Integer bookId) {
-        User user = userRepository.findById(userId)
+    public ReserveDTO addBookToOrder(String userName, Integer bookId){
+        User user=userRepository.findByEmail(userName)
                 .orElseThrow(() -> new IllegalArgumentException("User not found."));
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new IllegalArgumentException("Book not found."));
@@ -42,28 +42,33 @@ public class ReserveService {
             reserve.setReserveStatus("pending");
             reserve.setTotalQuantity(1);
             reserve.setTotalPrice(book.getPrice());
-//            reserveRepository.save(reserve);
+            reserveRepository.save(reserve);
         }
-//add the first book to cart
-//        if(reserve.getBooks()==null){
-//            List<Book> books=new ArrayList<>();
-//            books.add(book);
-//            reserve.setBooks(books);
-//        }
-//        else{
-//            reserve.getBooks().add(book);
-//        }
+        reserve.addBook(book);
         reserveRepository.save(reserve);
         return convertToDTO(reserve);
     }
 
     private ReserveDTO convertToDTO (Reserve reserve){
         ReserveDTO reserveDTO = new ReserveDTO();
-        reserveDTO.setReserveId(reserve.getId());
+        reserveDTO.setReserveId(reserve.getReserveId());
         reserveDTO.setTotalQuantity(reserve.getTotalQuantity());
         reserveDTO.setTotalPrice(reserve.getTotalPrice());
-//        reserveDTO.setReservedBooks(reserve.getBooks());
+        reserveDTO.setReservedBooks(reserve.getBooks());
+        reserveDTO.setReserveStatus(reserve.getReserveStatus());
 
         return reserveDTO;
+    }
+
+    @Transactional
+    public ReserveDTO confirmReserve(String userName){
+        User user=userRepository.findByEmail(userName)
+                .orElseThrow(() -> new IllegalArgumentException("User not found."));
+        List<Reserve> pendingReserves = reserveRepository.findAllByReserveStatusAndUser("pending",user);
+        Reserve reserve=pendingReserves.get(0);
+        reserve.setReserveStatus("confirmed");
+        reserveRepository.save(reserve);
+        return convertToDTO(reserve);
+
     }
 }

@@ -1,16 +1,17 @@
 package com.BookStore.BookBliss.Entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,7 +20,7 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer bookId;
     private String bookName;
     private BigDecimal price;
     private String source;
@@ -33,12 +34,20 @@ public class Book {
 //
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_category_id",referencedColumnName = "categoryId")
+    @JsonBackReference
     private Category category;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_sub_category_id",referencedColumnName = "subCategoryId")
+    @JsonBackReference
     private SubCategory subCategory;
 
-    @ManyToMany(mappedBy = "books",fetch = FetchType.LAZY)
-    private List<Reserve> reserves;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "books")
+    @JsonIgnore
+    private Set<Reserve> reserves;
 }

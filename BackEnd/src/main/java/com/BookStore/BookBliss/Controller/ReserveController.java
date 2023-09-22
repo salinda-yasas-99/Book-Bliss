@@ -14,8 +14,15 @@ import org.springframework.web.bind.annotation.*;
 public class ReserveController {
     private final ReserveService reserveService;
 
-    @PostMapping("/placeOrder/{userId}/{bookId}")
-    public ReserveDTO placeOrder(@PathVariable Integer userId, @PathVariable Integer bookId) {
-        return reserveService.placeOrder(userId, bookId);
+    @PostMapping("/placeOrder/{userName}/{bookId}")
+    public ResponseEntity<ReserveDTO> placeOrder(@PathVariable String userName, @PathVariable Integer bookId) {
+        return ResponseEntity.ok(reserveService.addBookToOrder(userName, bookId));
     }
+
+    @PostMapping("/confirmOrder/{userName}")
+    public ResponseEntity<ReserveDTO> confirmOrder(@PathVariable String userName){
+        return ResponseEntity.ok(reserveService.confirmReserve(userName));
+    }
+
+//    @PostMapping("/increaseBookCount/{bookId}")
 }

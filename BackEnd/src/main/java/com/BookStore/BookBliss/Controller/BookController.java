@@ -1,6 +1,7 @@
 package com.BookStore.BookBliss.Controller;
 
 import com.BookStore.BookBliss.DTO.BookDTO;
+import com.BookStore.BookBliss.DTO.ReserveDTO;
 import com.BookStore.BookBliss.Service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,4 +29,9 @@ public class BookController {
     ){
         return ResponseEntity.ok(bookService.addBook(bookAddRequest));
     }
+
+//    @PostMapping("/placeOrder/{userId}/{bookId}")
+//    public ReserveDTO placeOrder(@PathVariable Integer userId, @PathVariable Integer bookId) {
+//        return bookService.addBookToOrder(userId, bookId);
+//    }
 }
