@@ -28,9 +28,11 @@ public class Book {
     private String author;
     private String language;
 
+/*
     @ManyToMany(mappedBy = "reservedBooks",fetch=FetchType.LAZY)
     @JsonBackReference
     private List<Reserve> reserves;
+*/
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_category_id",referencedColumnName = "categoryId")

@@ -21,7 +21,7 @@ public class SubCategoryController {
         return ResponseEntity.ok(subCategoryService.addSubCategory(subCategoryDTO));
     }
 
-    @GetMapping()
+    @GetMapping("/subCategories")
     public List<SubCategoryDTO> getAllSubCategories(){
         return subCategoryService.getAllSubCategories();
     }
