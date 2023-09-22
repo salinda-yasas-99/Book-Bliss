@@ -22,7 +22,7 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
             <CardMedia image={item.source} alt={item.name} className={classes.media} />
             <CardContent className={classes.cardContent}>
                 <Typography variant="h6">{item.name}</Typography>
-                <Typography variant="h6" color='secondary' >{item.booktotal}</Typography>
+                <Typography variant="h6" color='secondary' >Rs.{item.booktotal}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
                 <div className={classes.buttons}>

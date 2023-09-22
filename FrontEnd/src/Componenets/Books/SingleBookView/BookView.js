@@ -88,8 +88,10 @@ const BookView = () => {
                         <b>{book.name}</b>
                     </Typography>
 
-                    <Typography variant="h6">By {book.author}</Typography>
+                    <Typography variant="h6">By {book.author} (Author)</Typography>
                     <Typography variant="p" >Language :{book.language}</Typography>
+                    <Typography variant="p" >Category :{book.category}</Typography>
+                    <Typography variant="p" >Sub Category :{book.subCategory}</Typography>
                     <br />
                     <Typography variant="p" dangerouslySetInnerHTML={createMarkup(book.desc)}/>
                     <Typography variant="h3" color="secondary">

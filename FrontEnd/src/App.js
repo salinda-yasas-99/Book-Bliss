@@ -276,7 +276,7 @@ function App() {
     }, [cart]);
 
     useEffect(() => {
-        console.log("this is new order",JSON.stringify(newOrder));
+        console.log("this is new order",newOrder);
     }, [newOrder]);
 
 
@@ -335,25 +335,20 @@ function App() {
         }
     };
 
-    /*const handleEmptyCart = async () => {
-        const response = await cart.empty();
-
-        setCart(response.cart);
-    };*/
-
-    /*const refreshCart = async () => {
-        const newCart = await commerce.cart.refresh();
-
-        setCart(newCart);
+   /* const handleEmptyCart = async () => {
+        setCart((prevCart) => ({
+            ...prevCart,
+            items: [],
+            totalItems: 0,
+            totalPrice: 0,
+        }));
     };*/
 
 
 
     const handleCaptureCheckout = async (newOrder) => {
-
             setNewOrder(newOrder);
             //refreshCart();
-
     };
 
 

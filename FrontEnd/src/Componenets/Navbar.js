@@ -41,52 +41,6 @@ const Navbar = ({ totalItems, user }) => {
         window.location.href = '/login';
     }
 
-   /* const renderUserMenu = (
-        <div>
-            <IconButton
-                component={Link}
-                to="/cart"
-                aria-label="Show cart items"
-                color="inherit"
-            >
-                <Badge badgeContent={totalItems} color="secondary">
-                    <ShoppingCart />
-                </Badge>
-            </IconButton>
-            <IconButton
-                aria-label="User Menu"
-                aria-controls="user-menu"
-                aria-haspopup="true"
-                onClick={handleMenuOpen}
-                style={{ color: 'white',fontSize: '14px'}}
-            >
-               {user}<ArrowDropDownIcon />
-            </IconButton>
-            <Menu
-                id="user-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleMenuClose}
-                style={{ color: 'white' }}
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right', // Adjust this to change the horizontal position
-                }}
-                transformOrigin={{
-                    vertical: 'bottom',
-                    horizontal: "right", // Adjust this to change the horizontal position
-                }}
-            >
-                {/!*<MenuItem component={Link} to="/userprofile" onClick={handleMenuClose} >*!/}
-                <MenuItem component={Link} to="/profile" onClick={handleMenuClose}>
-                    User Profile
-                </MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            </Menu>
-        </div>
-    );*/
-
     const renderUserMenu = (
         <div>
             <IconButton
