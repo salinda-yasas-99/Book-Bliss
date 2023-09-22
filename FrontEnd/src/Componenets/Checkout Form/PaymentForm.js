@@ -4,6 +4,7 @@ import { Elements, CardElement, ElementsConsumer } from '@stripe/react-stripe-js
 import { loadStripe } from '@stripe/stripe-js';
 
 import Review from './Review';
+import {saveNewOrder} from "../../Services/RestApiCalls";
 
 const stripePromise = loadStripe("pk_test_51J201hSHFIyVtnqxN74XMUe3JQIK1I9DD4DnLVPlWV3yiDoGSI6kVIZlW33T5QEFtPR0yL9hQVcp5WEU0dhSjzZa00NivWOi4j");
 
@@ -85,12 +86,12 @@ const PaymentForm = ({ nextStep, backStep, shippingData, onCaptureCheckout,cart}
                         payment_method_id: paymentMethod.id,
                     },
                 },
-                totalPayment: cart.totalPrice
+                totalPayment: cart.totalPrice+shippingData.shippingOption.price
             };
 
             setNewOrder(orderData);
             onCaptureCheckout(orderData);
-
+            saveNewOrder(orderData);
             nextStep();
         }
     };

@@ -1,116 +1,4 @@
-/*
-import React from 'react';
-import {
-    Container,
-    Typography,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableRow,
-    Paper,
-    Button,
-    Grid, Avatar,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import Navbar from "../Componenets/Navbar";
-import Footer from "../Componenets/Footer";
-
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        marginTop: theme.spacing(4),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    paper: {
-        padding: theme.spacing(3),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        backgroundColor: theme.palette.primary.main,
-        width: theme.spacing(7),
-        height: theme.spacing(7),
-    },
-    userName: {
-        marginTop: theme.spacing(2),
-    },
-    table: {
-        minWidth: 350,
-        marginTop: theme.spacing(2),
-    },
-    editButton: {
-        marginTop: theme.spacing(2),
-    },
-}));
-
-function UserProfile() {
-    const classes = useStyles();
-
-    return (
-        <div>
-        <Navbar />
-        <Container component="main" maxWidth="xs">
-            <div className={classes.root}>
-                <Paper elevation={3} className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <AccountCircleIcon fontSize="large" />
-                    </Avatar>
-                    <Typography component="h1" variant="h5" className={classes.userName}>
-                        John Doe
-                    </Typography>
-                    <Typography variant="body2">johndoe@example.com</Typography>
-                </Paper>
-                <TableContainer component={Paper} className={classes.table}>
-                    <Table>
-                        <TableBody>
-                            <TableRow>
-                                <TableCell component="th" scope="row">
-                                    Username
-                                </TableCell>
-                                <TableCell align="right">johndoe</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell component="th" scope="row">
-                                    Email Address
-                                </TableCell>
-                                <TableCell align="right">johndoe@example.com</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell component="th" scope="row">
-                                    Phone Number
-                                </TableCell>
-                                <TableCell align="right">123-456-7890</TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.editButton}
-                >
-                    Edit Profile
-                </Button>
-            </div>
-
-        </Container>
-            <Footer />
-        </div>
-    );
-}
-
-export default UserProfile;
-
-
-
-*/
-
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Container,
     Typography,
@@ -127,20 +15,21 @@ import { makeStyles } from '@material-ui/core/styles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {getUserDetails} from "../Services/RestApiCalls";
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
         minHeight: '70vh',
-        justifyContent:'center',// Make sure the container takes the full viewport height
+        justifyContent:'center',
     },
     content: {
-        flexGrow: 1, // Allow content to grow and push footer to the bottom
-        padding: theme.spacing(2), // Add some padding as needed
+        flexGrow: 1,
+        padding: theme.spacing(2),
     },
     footer: {
-        marginTop: 'auto', // Push the footer to the bottom
+        marginTop: 'auto',
     },
     paper: {
         padding: theme.spacing(3),
@@ -168,38 +57,91 @@ const useStyles = makeStyles((theme) => ({
 function UserProfile() {
     const classes = useStyles();
 
+    const [user, setUser] = useState(null);
 
-   /* const testToken = localStorage.getItem('token');
-
-    console.log("web token in profile ", testToken);
-
-
-    const authAxios = axios.create({
-        headers: {
-            'Authorization': `Bearer ${testToken}`
-        },
-        withCredentials: true
-    });
-
-    console.log("This is authAxios",authAxios);
-    const testEndpoint = async () => {
-        try{
-            const  response = authAxios.get("http://localhost:8080/api/v1/book-controller/book")
-                .then(console.log)
-                .catch(console.log);
-            console.log("this is demo data ",response.data);
-
+    useEffect(() => {
+         async function fetchUserDetails() {
+            try {
+                const userDetails = await getUserDetails();
+                setUser(userDetails); // Update the user state
+            } catch (error) {
+                console.error("Error fetching user details:", error);
+            }
         }
-        catch(err){
-            console.error("This is error ",err);
-        }
-    };*/
+
+        fetchUserDetails();
+    }, []);
+
     return (
         <div className={classes.root}>
             <div className={classes.content}>
                 <Container component="main" maxWidth="xs">
                     <div className={classes.root}>
-                        <Paper elevation={3} className={classes.paper}>
+                        {user ? (
+                            <Paper elevation={3} className={classes.paper}>
+                                <Avatar className={classes.avatar}>
+                                    <AccountCircleIcon fontSize="large" />
+                                </Avatar>
+                                <Typography component="h1" variant="h5" className={classes.userName}>
+                                    {user.firstName}
+                                </Typography>
+                                <Typography variant="body2">{user.email}</Typography>
+                            </Paper>
+                        ) : (
+                            <p>Loading user details...</p>
+                        )}
+                        {user && (
+                            <TableContainer component={Paper} className={classes.table}>
+                                <Table>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell component="th" scope="row">
+                                                Username
+                                            </TableCell>
+                                            <TableCell align="right">{user.email}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell component="th" scope="row">
+                                                First Name
+                                            </TableCell>
+                                            <TableCell align="right">{user.firstName}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell component="th" scope="row">
+                                                Last Name
+                                            </TableCell>
+                                            <TableCell align="right">{user.lastName}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell component="th" scope="row">
+                                                Email Address
+                                            </TableCell>
+                                            <TableCell align="right">{user.email}</TableCell>
+                                        </TableRow>
+                                        {/* Other user details */}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        )}
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            className={classes.editButton}
+                            component={Link}
+                            to={"/order"}
+                        >
+                            View My Orders
+                        </Button>
+                    </div>
+                </Container>
+            </div>
+        </div>
+
+        /*<div className={classes.root}>
+            <div className={classes.content}>
+                <Container component="main" maxWidth="xs">
+                    <div className={classes.root}>
+                        {user ? (<Paper elevation={3} className={classes.paper}>
                             <Avatar className={classes.avatar}>
                                 <AccountCircleIcon fontSize="large" />
                             </Avatar>
@@ -215,30 +157,24 @@ function UserProfile() {
                                         <TableCell component="th" scope="row">
                                             Username
                                         </TableCell>
-                                        <TableCell align="right">johndoe</TableCell>
+                                        <TableCell align="right">{user.email}</TableCell>
                                     </TableRow>
                                     <TableRow>
                                         <TableCell component="th" scope="row">
                                             Email Address
                                         </TableCell>
-                                        <TableCell align="right">johndoe@example.com</TableCell>
+                                        <TableCell align="right">{user.email}</TableCell>
                                     </TableRow>
-                                    <TableRow>
+                                   {/!* <TableRow>
                                         <TableCell component="th" scope="row">
                                             Phone Number
                                         </TableCell>
                                         <TableCell align="right">123-456-7890</TableCell>
-                                    </TableRow>
+                                    </TableRow>*!/}
                                 </TableBody>
                             </Table>
                         </TableContainer>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            className={classes.editButton}
-                        >
-                            Edit Profile
-                        </Button>
+
                         <Button
                             variant="contained"
                             color="primary"
@@ -248,10 +184,12 @@ function UserProfile() {
                         >
                             View My Orders
                         </Button>
-                    </div>
+                    </div>: (
+                            <p>Loading user details...</p>
+                            )}
                 </Container>
             </div>
-        </div>
+        </div>*/
     );
 }
 

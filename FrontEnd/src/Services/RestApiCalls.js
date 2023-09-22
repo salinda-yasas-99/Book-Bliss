@@ -110,9 +110,121 @@ export const getSubCategories = async () => {
     }
 };
 
-//get user details
 
-//post order details
+export const saveNewOrder = async (order)=>{
+
+    const currentDate = new Date();
+    const Token = localStorage.getItem('token');
+    const decodedToken = jwt_decode(Token);
+    const loggedUser = decodedToken.sub;
+
+    /*const dateAsString = currentDate.toString();
+    console.log("This is string date ",dateAsString);*/
+
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const dateAsString = currentDate.toLocaleDateString(undefined, options);
+    console.log("This is string date:", dateAsString);
+
+    const orderItems = order.line_items.map(item => ({
+        "id": item.bookId,
+        "itemQuantity": item.quantity,
+        "itemSubtotal": item.booktotal
+    }));
+
+    console.log("this is mapped orderline items",orderItems);
+
+    const newOrder= {
+            username: loggedUser,
+            totalPrice: order.totalPayment,
+            reserveStatus: "payment recieved",
+            firstName:order.customer.firstname,
+            lastName:order.customer.lastname,
+            email:order.customer.email,
+            address:order.shipping.street,
+            orderDate: dateAsString,
+            city: order.shipping.town_city,
+            zip:order.shipping.postal_zip_code,
+            shippingCountry:order.shipping.country,
+            shippingOption:order.shippingType.shipping_method.type,
+            price: order.shippingType.shipping_method.price,
+            order_items: orderItems
+        };
+
+
+    console.log("This is axios order ",newOrder);
+
+    const authAxios = axios.create({
+        headers: {
+            'Authorization': `Bearer ${Token}`
+        },
+        withCredentials: true
+    });
+
+        const url = `http://localhost:8080/api/v1/orders-controller/placeOrder`;
+        try {
+            const  response = authAxios.post(url,newOrder)
+                .then(console.log)
+                .catch(console.log);
+            console.log("this is order post data ",response.data);
+
+        }
+        catch(err){
+            console.error("This is error in order placing",err);
+        }
+
+
+
+}
+
+export const getUserDetails = async ()=>{
+
+    const Token = localStorage.getItem('token');
+    const decodedToken = jwt_decode(Token);
+    const loggedUser = decodedToken.sub;
+
+    const authAxios = axios.create({
+        headers: {
+            'Authorization': `Bearer ${Token}`
+        },
+        withCredentials: true
+    });
+    /*const url = `http://localhost:8080/api/v1/user-controller/user/${loggedUser}`;*/
+    try {
+        const response = await authAxios.get(`http://localhost:8080/api/v1/user-controller/user/${loggedUser}`);
+        console.log("This is userdetails in axios",response.data);
+        return response.data;
+
+    }
+    catch(err){
+        console.error("This is error in order placing",err);
+    }
+
+}
+
+
+export const getOrderDetails = async ()=>{
+
+    const Token = localStorage.getItem('token');
+    const decodedToken = jwt_decode(Token);
+    const loggedUser = decodedToken.sub;
+
+    const authAxios = axios.create({
+        headers: {
+            'Authorization': `Bearer ${Token}`
+        },
+        withCredentials: true
+    });
+    try {
+        const response = await authAxios.get(`http://localhost:8080/api/v1/orders-controller/user/${loggedUser}`);
+        console.log("This is orderdetails in axios",response.data);
+        return response.data;
+
+    }
+    catch(err){
+        console.error("This is error in order placing",err);
+    }
+
+}
 
 
 
