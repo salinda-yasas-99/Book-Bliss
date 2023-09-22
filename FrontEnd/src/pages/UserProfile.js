@@ -126,6 +126,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -167,7 +168,8 @@ const useStyles = makeStyles((theme) => ({
 function UserProfile() {
     const classes = useStyles();
 
-    const testToken = localStorage.getItem('token');
+
+   /* const testToken = localStorage.getItem('token');
 
     console.log("web token in profile ", testToken);
 
@@ -191,7 +193,7 @@ function UserProfile() {
         catch(err){
             console.error("This is error ",err);
         }
-    };
+    };*/
     return (
         <div className={classes.root}>
             <div className={classes.content}>
@@ -234,8 +236,6 @@ function UserProfile() {
                             variant="contained"
                             color="primary"
                             className={classes.editButton}
-                            onClick={testEndpoint}
-
                         >
                             Edit Profile
                         </Button>
@@ -243,8 +243,8 @@ function UserProfile() {
                             variant="contained"
                             color="primary"
                             className={classes.editButton}
-                            onClick={testEndpoint}
-
+                            component={Link}
+                            to={"/order"}
                         >
                             View My Orders
                         </Button>

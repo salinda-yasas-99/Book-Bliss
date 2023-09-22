@@ -110,6 +110,10 @@ export const getSubCategories = async () => {
     }
 };
 
+//get user details
+
+//post order details
+
 
 
 

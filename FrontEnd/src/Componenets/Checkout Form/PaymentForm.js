@@ -7,7 +7,7 @@ import Review from './Review';
 
 const stripePromise = loadStripe("pk_test_51J201hSHFIyVtnqxN74XMUe3JQIK1I9DD4DnLVPlWV3yiDoGSI6kVIZlW33T5QEFtPR0yL9hQVcp5WEU0dhSjzZa00NivWOi4j");
 
-/*const PaymentForm = ({ checkoutToken, nextStep, backStep, shippingData, onCaptureCheckout, order }) => {*/
+
 const PaymentForm = ({ nextStep, backStep, shippingData, onCaptureCheckout,cart}) => {
 
 
