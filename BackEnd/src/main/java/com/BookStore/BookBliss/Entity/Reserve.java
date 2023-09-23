@@ -27,29 +27,29 @@ public class Reserve {
     @OneToOne(mappedBy = "reserve")
     private Courier courier;
 
-//    @ManyToMany(mappedBy = "reserves", cascade = CascadeType.ALL)
-////    private List<Book> books=new ArrayList<>();
-//    private List<Book> books;
-
     @ManyToOne
     @JoinColumn(name = "userId")
     @JsonBackReference
     private User user;
 
 
-    @ManyToMany(fetch =FetchType.LAZY,cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    @JoinTable(
-            name = "reserve_book",
-            joinColumns = {@JoinColumn(name = "reserveId")
-            },
-            inverseJoinColumns = {@JoinColumn(name = "bookId")}
-    )
-    private Set<Book> books=new HashSet<>();
+//    @ManyToMany(fetch =FetchType.LAZY,cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+//    @JoinTable(
+//            name = "reserve_book",
+//            joinColumns = {@JoinColumn(name = "reserveId")
+//            },
+//            inverseJoinColumns = {@JoinColumn(name = "bookId")}
+//    )
+//    private Set<Book> books=new HashSet<>();
 
-    public void addBook(Book book){
-        this.books.add(book);
-        book.getReserves().add(this);
-    }
+//    public void addBook(Book book){
+//        this.books.add(book);
+//        book.getReserves().add(this);
+//    }
+
+    @OneToMany(mappedBy="reserve",cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<ReserveBook> reserveBooks=new HashSet<>();
 
 
 

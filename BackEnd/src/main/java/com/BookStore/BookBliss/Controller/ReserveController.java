@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/order-controller")
 @RequiredArgsConstructor
@@ -24,5 +26,13 @@ public class ReserveController {
         return ResponseEntity.ok(reserveService.confirmReserve(userName));
     }
 
-//    @PostMapping("/increaseBookCount/{bookId}")
+    @PutMapping("/increaseOrder/{bookId}/{reserveId}")
+    public ResponseEntity<String> increaseOrder(@PathVariable Integer bookId,@PathVariable Integer reserveId){
+        return ResponseEntity.ok(reserveService.increaseQuantity(bookId,reserveId));
+    }
+
+    @PutMapping("/decreaseOrder/{bookId}/{reserveId}")
+    public ResponseEntity<String> decreaseOrder(@PathVariable Integer bookId,@PathVariable Integer reserveId){
+        return ResponseEntity.ok(reserveService.decreaseQuantity(bookId,reserveId));
+    }
 }

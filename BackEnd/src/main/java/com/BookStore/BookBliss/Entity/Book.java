@@ -1,13 +1,12 @@
 package com.BookStore.BookBliss.Entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -28,10 +27,6 @@ public class Book {
     private String author;
     private String language;
 
-//    @ManyToMany(mappedBy = "reservedBooks",fetch=FetchType.LAZY)
-//    @JsonBackReference
-//    private List<Reserve> reserves;
-//
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_category_id",referencedColumnName = "categoryId")
     @JsonBackReference
@@ -42,12 +37,16 @@ public class Book {
     @JsonBackReference
     private SubCategory subCategory;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },
-            mappedBy = "books")
-    @JsonIgnore
-    private Set<Reserve> reserves;
+//    @ManyToMany(fetch = FetchType.LAZY,
+//            cascade = {
+//                    CascadeType.PERSIST,
+//                    CascadeType.MERGE
+//            },
+//            mappedBy = "books")
+//    @JsonIgnore
+//    private Set<Reserve> reserves;
+
+    @OneToMany(mappedBy="book",cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<ReserveBook> reserveBooks=new HashSet<>();
 }
