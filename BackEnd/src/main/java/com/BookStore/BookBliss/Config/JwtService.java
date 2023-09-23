@@ -1,4 +1,5 @@
 package com.BookStore.BookBliss.Config;
+import com.BookStore.BookBliss.Entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -30,6 +31,21 @@ public class JwtService {
     public String generateToken(UserDetails userDetails){
         return generateToken(new HashMap<>(),userDetails);
     }
+    /*public String generateToken(UserDetails userDetails){
+        Map<String, Object> claims = new HashMap<>();
+        Integer userId = getUserIdFromUserDetails(userDetails);
+        claims.put("userId", userId);
+       *//* extraClaims.put("userId", userDetails.getId());*//*
+        return generateToken(new HashMap<>(),userDetails);
+    }*/
+
+//    private Integer getUserIdFromUserDetails(UserDetails userDetails) {
+//        if (userDetails instanceof User) {
+//            return ((User) userDetails).getUserId();
+//        }
+//        // Return an appropriate value or throw an exception if user ID extraction fails
+//        return null;
+//    }
 
     public String generateToken(
             Map<String, Objects> extraClaims,

@@ -24,7 +24,7 @@ public class CategoryController {
     }
 
 
-    @GetMapping()
+    @GetMapping("/categories")
     public List<CategoryDTO> getAllCategories(){
         return catergoryService.getAllCategories();
     }

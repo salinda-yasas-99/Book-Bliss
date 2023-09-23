@@ -51,6 +51,7 @@ public class SubCategoryService {
         subCategoryDTO.setSubCategoryId(subCategory.getSubCategoryId());
         subCategoryDTO.setSubCategoryName(subCategory.getSubCategoryName());
         subCategoryDTO.setSubCategoryDescription(subCategory.getSubCategoryDescription());
+        subCategoryDTO.setFk_categoryId(subCategoryDTO.getFk_categoryId());
         return  subCategoryDTO;
     }
 }

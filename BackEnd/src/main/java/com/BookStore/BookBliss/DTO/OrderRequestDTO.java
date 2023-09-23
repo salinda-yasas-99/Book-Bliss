@@ -1,22 +1,26 @@
-package com.BookStore.BookBliss.Entity;
+package com.BookStore.BookBliss.DTO;
 
-import jakarta.persistence.*;
+
+import com.BookStore.BookBliss.Entity.B_OrderItems;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.util.List;
+
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name="courier")
-public class Courier {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer courierId;
+@NoArgsConstructor
+public class OrderRequestDTO {
+    private BigDecimal totalPrice;
+    private String reserveStatus;
+    private String username;
+    private String orderDate;
+    private List<OrderItemDTo> order_items;
     private String firstName;
     private String lastName;
     private String address;
@@ -27,7 +31,4 @@ public class Courier {
     private String shippingOption;
     private float price;
 
- /*   @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="fk_reserve_id")
-    private Reserve reserve;*/
 }
