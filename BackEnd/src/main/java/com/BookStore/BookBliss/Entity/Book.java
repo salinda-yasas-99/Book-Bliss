@@ -35,10 +35,10 @@ public class Book {
 */
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_category_id",referencedColumnName = "categoryId")
+    @JoinColumn(name = "fk_category_id", referencedColumnName = "categoryId")
     private Category category;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_sub_category_id",referencedColumnName = "subCategoryId")
+    @JoinColumn(name = "fk_sub_category_id", referencedColumnName = "subCategoryId")
     private SubCategory subCategory;
 }
