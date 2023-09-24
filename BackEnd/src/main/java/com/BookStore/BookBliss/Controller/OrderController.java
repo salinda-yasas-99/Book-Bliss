@@ -2,8 +2,8 @@ package com.BookStore.BookBliss.Controller;
 
 
 import com.BookStore.BookBliss.DTO.OrderRequestDTO;
-import com.BookStore.BookBliss.Entity.B_Order;
-import com.BookStore.BookBliss.Service.B_OrderService;
+import com.BookStore.BookBliss.Entity.Order;
+import com.BookStore.BookBliss.Service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +15,9 @@ import java.util.List;
 @RequestMapping("/api/v1/orders-controller")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
-public class B_OrderController {
+public class OrderController {
 
-    private final B_OrderService b_orderService;
+    private final OrderService _orderService;
 
 
     /*@PostMapping("/placeOrder")
@@ -30,7 +30,7 @@ public class B_OrderController {
     public ResponseEntity<?> createOrder(@RequestBody OrderRequestDTO orderRequestDTO) {
         try {
             // Call the service method to save the order
-            b_orderService.createOrder(orderRequestDTO);
+            _orderService.createOrder(orderRequestDTO);
             return ResponseEntity.ok("Order created successfully.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -46,7 +46,7 @@ public class B_OrderController {
     @GetMapping("/user/{username}")
     public ResponseEntity<?> getOrdersByUser(@PathVariable String username) {
         try {
-            List<B_Order> orders = b_orderService.getOrdersByUser(username);
+            List<Order> orders = _orderService.getOrdersByUser(username);
             return ResponseEntity.ok(orders);
         } catch (Exception e) {
             // Handle the exception and return an error response
@@ -58,7 +58,7 @@ public class B_OrderController {
     @GetMapping("/order/{orderId}")
     public ResponseEntity<?> getOrderById(@PathVariable Integer orderId) {
         try {
-            B_Order order = b_orderService.getOrderById(orderId);
+            Order order = _orderService.getOrderById(orderId);
             if (order != null) {
                 return ResponseEntity.ok(order);
             } else {

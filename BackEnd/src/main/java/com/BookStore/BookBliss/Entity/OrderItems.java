@@ -6,8 +6,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.math.BigDecimal;
-import java.util.List;
 
 
 @Data
@@ -15,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name="t_orderItems")
-public class B_OrderItems {
+public class OrderItems {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer order_item_id;

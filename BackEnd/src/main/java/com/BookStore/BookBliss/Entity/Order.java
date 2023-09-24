@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.List;
 
 @Data
@@ -18,7 +17,7 @@ import java.util.List;
 @Entity
 @Builder
 @Table(name="t_order")
-public class B_Order {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderId;
@@ -29,7 +28,7 @@ public class B_Order {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_order_id", referencedColumnName = "orderId")
-    private List<B_OrderItems> orderItems;
+    private List<OrderItems> orderItems;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)

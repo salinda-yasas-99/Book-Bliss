@@ -9,18 +9,15 @@ import com.BookStore.BookBliss.Repository.CourierRepository;
 import com.BookStore.BookBliss.Repository.OrderRepo;
 import com.BookStore.BookBliss.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class B_OrderService {
+public class OrderService {
 
         private final OrderRepo orderRepo;
 
@@ -92,7 +89,7 @@ public class B_OrderService {
         User user = userRepository.findByEmail(orderRequestDTO.getUsername())
                 .orElseThrow(() -> new IllegalArgumentException("User not found."));
 
-        B_Order order = new B_Order();
+        Order order = new Order();
         order.setTotalPrice(orderRequestDTO.getTotalPrice());
         order.setReserveStatus(orderRequestDTO.getReserveStatus());
         order.setOrderDate(orderRequestDTO.getOrderDate());
@@ -113,13 +110,13 @@ public class B_OrderService {
 
         order.setCourier(courier);
 
-        List<B_OrderItems> orderItemsList = new ArrayList<>();
+        List<OrderItems> orderItemsList = new ArrayList<>();
         List<OrderItemDTo> orderItemDTOList = orderRequestDTO.getOrder_items(); // Get the list once to improve readability
 
         for (int i = 0; i < orderItemDTOList.size(); i++) {
             OrderItemDTo itemDTO = orderItemDTOList.get(i);
 
-            B_OrderItems orderItem = new B_OrderItems();
+            OrderItems orderItem = new OrderItems();
             orderItem.setItemQuantity(itemDTO.getItemQuantity());
             orderItem.setItemSubtotal(itemDTO.getItemSubtotal());
 
@@ -143,16 +140,16 @@ public class B_OrderService {
 
 
 
-    public List<B_Order> getOrdersByUser(String username) {
+    public List<Order> getOrdersByUser(String username) {
          User user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found."));
 
         return orderRepo.findByUser(user);
     }
 
-    public B_Order getOrderById(Integer orderId) {
+    public Order getOrderById(Integer orderId) {
         // Use your repository to fetch the order by orderId
-        Optional<B_Order> orderOptional = orderRepo.findById(orderId);
+        Optional<Order> orderOptional = orderRepo.findById(orderId);
 
         // Check if the order exists in the database
         if (orderOptional.isPresent()) {
