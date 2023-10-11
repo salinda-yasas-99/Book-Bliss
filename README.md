@@ -10,7 +10,11 @@
 ## Live App Demo
 <br/>
 
-https://github.com/salinda-yasas-99/Book-Bliss/assets/98233885/cc572efc-4f4b-45d6-bd43-f49344a6a1f3
+
+
+https://github.com/salinda-yasas-99/Book-Bliss/assets/98233885/12305fc9-f78c-4f5c-877b-ea18915fa16b
+
+
 
 
 ## Tools Used
