@@ -12,7 +12,11 @@
 
 
 
-https://github.com/salinda-yasas-99/Book-Bliss/assets/98233885/12305fc9-f78c-4f5c-877b-ea18915fa16b
+
+https://github.com/salinda-yasas-99/Book-Bliss/assets/98233885/317adbe8-1693-48ab-aa12-e58c019a9a8a
+
+
+
 
 
 
