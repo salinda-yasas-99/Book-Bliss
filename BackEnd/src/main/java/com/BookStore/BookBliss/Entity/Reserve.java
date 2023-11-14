@@ -1,20 +1,20 @@
 package com.BookStore.BookBliss.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="reserve")
 public class Reserve {
 
     @Id
@@ -27,24 +27,30 @@ public class Reserve {
     @OneToOne(mappedBy = "reserve")
     private Courier courier;
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(name = "reserveBook",
-    joinColumns = {
-            @JoinColumn(name = "reserveId",referencedColumnName = "reserveId")
-    },
-    inverseJoinColumns = {
-            @JoinColumn(name = "bookId",referencedColumnName = "bookId")
-    }
-    )
-    @JsonManagedReference
-    private List<Book> reservedBooks = new ArrayList<>();
-
     @ManyToOne
     @JoinColumn(name = "userId")
+    @JsonBackReference
     private User user;
 
-    public List<Book> getOrderedBooks() {
 
-        return reservedBooks;
-    }
+//    @ManyToMany(fetch =FetchType.LAZY,cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+//    @JoinTable(
+//            name = "reserve_book",
+//            joinColumns = {@JoinColumn(name = "reserveId")
+//            },
+//            inverseJoinColumns = {@JoinColumn(name = "bookId")}
+//    )
+//    private Set<Book> books=new HashSet<>();
+
+//    public void addBook(Book book){
+//        this.books.add(book);
+//        book.getReserves().add(this);
+//    }
+
+    @OneToMany(mappedBy="reserve",cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<ReserveBook> reserveBooks=new HashSet<>();
+
+
+
 }

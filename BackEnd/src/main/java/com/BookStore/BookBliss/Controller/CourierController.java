@@ -16,7 +16,7 @@ public class CourierController {
 
     private final CourierService courierService;
 
-    @PostMapping()
+    @PostMapping("/addCourier")
     public ResponseEntity<String> addCourierDetails(@RequestBody CourierDTO courierDTO){
         return ResponseEntity.ok(courierService.addCourierDetails(courierDTO));
     }

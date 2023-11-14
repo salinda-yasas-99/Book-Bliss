@@ -1,13 +1,11 @@
 package com.BookStore.BookBliss.Service;
 import com.BookStore.BookBliss.DTO.BookDTO;
-import com.BookStore.BookBliss.Entity.Book;
-import com.BookStore.BookBliss.Entity.Category;
-import com.BookStore.BookBliss.Entity.SubCategory;
+import com.BookStore.BookBliss.DTO.ReserveDTO;
+import com.BookStore.BookBliss.Entity.*;
 import com.BookStore.BookBliss.Exception.BookAlreadyExistException;
-import com.BookStore.BookBliss.Repository.BookRepository;
-import com.BookStore.BookBliss.Repository.CategoryRepository;
-import com.BookStore.BookBliss.Repository.SubCategoryRepository;
+import com.BookStore.BookBliss.Repository.*;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,18 +16,11 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class BookService {
-
-   /*
-   const BooksArray= [{id :10,name:"book1",price: 12,source:book1 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Novel"},
-    {id :20,name:"book2",price: 10,source:book2 , desc:"This is my book",author:"Martin",category:"english",subCategory:"Mystery"},
-    {id :30,name:"book3",price: 13,source:book3 , desc:"This is my book",author:"Martin",category:"english",subCategory:"Adventure"},
-    {id :40,name:"book4",price: 15,source:book4 , desc:"This is my book",author:"Martin",category:"sinhala",subCategory:"Grade 10"}];
-    */
-    private final BookRepository bookRepository;
-
     private final CategoryRepository categoryRepository;
-
     private final SubCategoryRepository subCategoryRepository;
+    private final ReserveRepository reserveRepository;
+    private final UserRepository userRepository;
+    private final BookRepository bookRepository;
 
     public List<BookDTO> getBooks() {
         List<Book> books = bookRepository.findAll();
@@ -81,4 +72,5 @@ public class BookService {
         }
 
     }
+
 }
