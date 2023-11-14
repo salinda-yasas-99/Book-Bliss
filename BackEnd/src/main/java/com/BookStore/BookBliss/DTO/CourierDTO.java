@@ -31,4 +31,5 @@ public class CourierDTO {
     private String shippingCountry;
     private String shippingOption;
     private float price;
+    private Integer reserveId;
 }

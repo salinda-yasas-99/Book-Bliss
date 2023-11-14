@@ -1,13 +1,15 @@
 package com.BookStore.BookBliss.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.Set;
 
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,5 +25,11 @@ public class SubCategory {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_category_id",referencedColumnName = "categoryId")
+    @JsonBackReference
     private Category category;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_sub_category_id",referencedColumnName = "subCategoryId")
+    @JsonManagedReference
+    private Set<Book> books;
 }

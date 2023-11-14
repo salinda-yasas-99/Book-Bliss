@@ -1,12 +1,10 @@
 package com.BookStore.BookBliss.Entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +25,7 @@ public class Courier {
     private String shippingOption;
     private float price;
 
- /*   @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fk_reserve_id")
-    private Reserve reserve;*/
+    private Reserve reserve;
 }
