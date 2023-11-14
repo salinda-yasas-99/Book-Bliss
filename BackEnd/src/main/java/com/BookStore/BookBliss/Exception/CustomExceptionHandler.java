@@ -10,9 +10,9 @@ import java.time.ZonedDateTime;
 @RestControllerAdvice
 public class CustomExceptionHandler {
 
-    @ExceptionHandler(value = {EmailNotFoundException.class})
+    @ExceptionHandler(value = {EmailAlreadyExistException.class})
     public ResponseEntity<Object> handleEmailNotFoundException(
-            EmailNotFoundException exception
+            EmailAlreadyExistException exception
     ){
         HttpStatus httpStatus =HttpStatus.CONFLICT;
         CustomException customException = new CustomException(
@@ -21,6 +21,44 @@ public class CustomExceptionHandler {
                 ZonedDateTime.now());
     return new ResponseEntity<>(customException,httpStatus);
     }
+
+    @ExceptionHandler(value = {EmailOrPasswordIncorrectException.class})
+    public ResponseEntity<Object> handleEmailOrPasswordIncorrectException(
+            EmailOrPasswordIncorrectException exception
+    ){
+        HttpStatus httpStatus =HttpStatus.FORBIDDEN;
+        CustomException customException = new CustomException(
+                exception.getMessage(),
+                httpStatus,
+                ZonedDateTime.now());
+        return new ResponseEntity<>(customException,httpStatus);
+    }
+
+    @ExceptionHandler(value = {BookAlreadyExistException.class})
+    public ResponseEntity<Object> handleBookAlreadyExistException(
+            BookAlreadyExistException exception
+    ){
+        HttpStatus httpStatus =HttpStatus.CONFLICT;
+        CustomException customException = new CustomException(
+                exception.getMessage(),
+                httpStatus,
+                ZonedDateTime.now());
+        return new ResponseEntity<>(customException,httpStatus);
+    }
+
+    @ExceptionHandler(value = {CategoryAlreadyExistsException.class})
+    public ResponseEntity<Object> handleCategoryAlreadyExistException(
+            CategoryAlreadyExistsException exception
+    ){
+        HttpStatus httpStatus =HttpStatus.CONFLICT;
+        CustomException customException = new CustomException(
+                exception.getMessage(),
+                httpStatus,
+                ZonedDateTime.now());
+        return new ResponseEntity<>(customException,httpStatus);
+    }
+
+
 
 
 

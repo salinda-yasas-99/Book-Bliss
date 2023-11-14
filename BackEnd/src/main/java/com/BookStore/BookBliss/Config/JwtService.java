@@ -1,5 +1,5 @@
 package com.BookStore.BookBliss.Config;
-
+import com.BookStore.BookBliss.Entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -7,7 +7,6 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,6 +19,7 @@ public class JwtService {
 
     private static final String SECRET_KEY="a67fca1f84079c86c23c3ff302b6d2fff9702ef992524266847d6256c6eaa35e";
     public String extractUsername(String token) {
+
         return extractClaim(token,Claims::getSubject);
     }
 
@@ -31,6 +31,21 @@ public class JwtService {
     public String generateToken(UserDetails userDetails){
         return generateToken(new HashMap<>(),userDetails);
     }
+    /*public String generateToken(UserDetails userDetails){
+        Map<String, Object> claims = new HashMap<>();
+        Integer userId = getUserIdFromUserDetails(userDetails);
+        claims.put("userId", userId);
+       *//* extraClaims.put("userId", userDetails.getId());*//*
+        return generateToken(new HashMap<>(),userDetails);
+    }*/
+
+//    private Integer getUserIdFromUserDetails(UserDetails userDetails) {
+//        if (userDetails instanceof User) {
+//            return ((User) userDetails).getUserId();
+//        }
+//        // Return an appropriate value or throw an exception if user ID extraction fails
+//        return null;
+//    }
 
     public String generateToken(
             Map<String, Objects> extraClaims,
